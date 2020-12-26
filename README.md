@@ -15,7 +15,7 @@
 ## Installation
 
 ```shell
-composer require <vendor/your-packages>
+composer require yii-extension/user-view-bulma
 ```
 
 ### Unit testing
@@ -36,10 +36,10 @@ The package tests are checked with [Infection](https://infection.github.io/) mut
 
 ### Static analysis
 
-The code is statically analyzed with [Phan](https://github.com/phan/phan/wiki). To run static analysis:
+The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
 
 ```shell
-./vendor/bin/phan
+./vendor/bin/psalm
 ```
 
 ### License

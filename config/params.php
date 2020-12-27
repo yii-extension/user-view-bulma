@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 use Yii\Extension\Service\ServiceParameter;
 use Yiisoft\Aliases\Aliases;
+use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Factory\Definitions\Reference;
+use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\Router\UrlMatcherInterface;
 
 return [
     'app' => [
@@ -43,8 +46,12 @@ return [
     'yii-extension/view-services' => [
         'defaultParameters' => [
             'aliases' => Reference::to(Aliases::class),
+            'assetManager' => Reference::to(AssetManager::class),
             'locale' => Reference::to(Locale::class),
             'serviceParameter' => Reference::to(ServiceParameter::class),
+            'urlGenerator' => Reference::to(UrlGeneratorInterface::class),
+            'urlMatcher' => Reference::to(UrlMatcherInterface::class),
+
         ],
         'viewParameters' => [
             'field' => Reference::to(Field::class),
@@ -80,6 +87,7 @@ return [
         'theme' => [
             'pathMap' => [
                 '@layout' => '@user-view-views/layout',
+                '@views/site'  => '@user-view-views/site',
             ],
         ],
     ],

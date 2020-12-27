@@ -122,13 +122,15 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
             </p>
         <?php endif ?>
 
-        <p class = 'has-text-grey'>
-            <?= Html::a(
-                $translator->getMessage("Didn't receive confirmation message", 'user', $locale->language()),
-                $linkResend,
-                ['tabindex' => '5'],
-            ) ?>
-        </p>
+        <?php if ($isConfirmation === true) : ?>
+            <p class = 'has-text-grey'>
+                <?= Html::a(
+                    $translator->getMessage("Didn't receive confirmation message", 'user', $locale->language()),
+                    $linkResend,
+                    ['tabindex' => '5'],
+                ) ?>
+            </p>
+        <?php endif ?>
 
     </div>
 

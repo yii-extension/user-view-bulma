@@ -60,7 +60,7 @@ if (!$user->isGuest()) {
                 ->begin() .
                     Html::submitButton(
                         'Logout (' . Html::encode($user->getIdentity()->getUsername()) . ')',
-                        ['class' => 'button is-black is-inverted']
+                        ['class' => 'button is-black is-inverted', 'id' => 'logout'],
                     ) .
                 Form::end()
         ]

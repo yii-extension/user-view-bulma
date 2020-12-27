@@ -6,6 +6,7 @@ namespace Yii\Extension\User\View;
 
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
+use Yiisoft\Yii\Bulma\Asset\BulmaHelpersAsset;
 
 final class LoginAsset extends AssetBundle
 {
@@ -18,6 +19,7 @@ final class LoginAsset extends AssetBundle
     ];
 
     public array $depends = [
-        BulmaAsset::class
+        BulmaAsset::class,
+        BulmaHelpersAsset::class,
     ];
 }

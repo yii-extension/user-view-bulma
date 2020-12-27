@@ -86,8 +86,7 @@ return [
     'yiisoft/view' => [
         'theme' => [
             'pathMap' => [
-                '@layout' => '@user-view-views/layout',
-                '@views/site'  => '@user-view-views/site',
+                '@layout' => '@user-view-views/layout'
             ],
         ],
     ],

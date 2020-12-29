@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Yii\Extension\User\RepositorySettings;
 use Yii\Extension\User\Form\RegisterForm;
-use Yii\Extension\User\View\RegisterAsset;
+use Yii\Extension\User\View\Asset\Register;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
@@ -28,19 +28,17 @@ $this->setTitle('Register');
   */
 
 $assetManager->register([
-    RegisterAsset::class
+    Register::class
 ]);
-
-$translator = new MessageSource($aliases->get('@user-view-language'));
 
 ?>
 
 <p class="title has-text-black">
-    <?= $translator->getMessage('Sign up', 'user', $locale->language()) ?>
+    <?= $translator->translate('Register') . '.' ?>
 </p>
 
 <p class="subtitle has-text-black">
-    <?= $translator->getMessage('Please fill out the following', 'user', $locale->language()) ?>
+    <?= $translator->translate('Please fill out the following') ?>
 </p>
 
 <hr class='mb-2'/>
@@ -48,12 +46,12 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
 <div class = 'column is-4 is-offset-4'>
 
     <?= Form::widget()
-        ->action($action)
+        ->action($urlGenerator->generate('register'))
         ->options(
             [
                 'id' => 'form-registration-register',
                 'class' => 'forms-registration-register bg-white shadow-md rounded px-8 pb-8',
-                'csrf' => $csrf
+                'csrf' => $csrf,
             ]
         )
         ->begin() ?>
@@ -61,7 +59,7 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
         <?= $field->config($data, 'email')
             ->textInput(
                 [
-                    'placeholder' => $translator->getMessage('Email', 'user', $locale->language()),
+                    'placeholder' => $translator->translate('Email'),
                     'tabindex' => '1'
                 ]
             ) ?>
@@ -69,16 +67,16 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
         <?= $field->config($data, 'username')
             ->textInput(
                 [
-                    'placeholder' => $translator->getMessage('Username', 'user', $locale->language()),
+                    'placeholder' => $translator->translate('Username'),
                     'tabindex' => '2'
                 ]
             ) ?>
 
-        <?php if ($settings->isGeneratingPassword() === false) : ?>
+        <?php if ($setting->isGeneratingPassword() === false) : ?>
             <?= $field->config($data, 'password')
                 ->passwordInput(
                     [
-                        'placeholder' => $translator->getMessage('Password', 'user', $locale->language()),
+                        'placeholder' => $translator->translate('Password'),
                         'tabindex' => '3'
                     ]
                 ) ?>
@@ -86,7 +84,7 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
 
         <div class = 'flex items-center justify-between'>
             <?= Html::submitButton(
-                $translator->getMessage('Register', 'user', $locale->language()),
+                $translator->translate('Register'),
                 [
                     'class' => 'button is-block is-info is-fullwidth', 'id' => 'login-button', 'tabindex' => '4'
                 ]
@@ -98,8 +96,8 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
 
         <div class = 'text-center pt-3'>
             <?= Html::a(
-                $translator->getMessage('Already registered - Sign in!', 'user', $locale->language()),
-                $url->generate('login'),
+                $translator->translate('Already registered - Sign in!'),
+                $urlGenerator->generate('login'),
                 ['tabindex' => '5']
             ) ?>
         </div>

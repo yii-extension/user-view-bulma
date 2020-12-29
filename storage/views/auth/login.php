@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
-use Yii\Extension\User\View\LoginAsset;
+use Yii\Extension\User\View\Asset\Login;
 use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
@@ -31,19 +31,17 @@ $this->setTitle('Login');
 
 $assetManager->register([
     NpmAllAsset::class,
-    LoginAsset::class,
+    Login::class,
 ]);
-
-$translator = new MessageSource($aliases->get('@user-view-language'));
 
 ?>
 
 <p class="title has-text-black">
-    <?= $translator->getMessage('Sing in', 'user', $locale->language()) ?>
+    <?= $translator->translate('Sing in') ?>
 </p>
 
 <p class="subtitle has-text-black">
-    <?= $translator->getMessage('Please fill out the following', 'user', $locale->language()) ?>
+    <?= $translator->translate('Please fill out the following') ?>
 </p>
 
 <hr class='mb-2'/>
@@ -75,11 +73,11 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
         </div>
 
         <?= Form::widget()
-            ->action($action)
+            ->action($urlGenerator->generate('login'))
             ->options(
                 [
                     'id' => 'form-security-login',
-                    'csrf' => $csrf
+                    'csrf' => $csrf,
                 ]
             )
             ->begin() ?>
@@ -87,7 +85,7 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
             <?= $field->config($data, 'login')
                 ->textInput(
                     [
-                        'placeholder' => $translator->getMessage('Username', 'user', $locale->language()),
+                        'placeholder' => $translator->translate('Username'),
                         'tabindex' => '1'
                     ]
                 ) ?>
@@ -95,13 +93,13 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
             <?= $field->config($data, 'password')
                 ->passwordInput(
                     [
-                        'placeholder' => $translator->getMessage('Password', 'user', $locale->language()),
+                        'placeholder' => $translator->translate('Password'),
                         'tabindex' => '2'
                     ]
                 ) ?>
 
             <?= Html::submitButton(
-                $translator->getMessage('Login', 'user', $locale->language()) . ' ' .
+                $translator->translate('Login') . ' ' .
                 html::tag('i', '', ['class' => 'fas fa-sign-in-alt', 'aria-hidden' => 'true']),
                 [
                     'class' => 'button is-block is-info is-fullwidth',
@@ -112,21 +110,21 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
 
         <?= Form::end() ?>
 
-        <?php if ($isPasswordRecovery === true) : ?>
+        <?php if ($setting->isPasswordRecovery() === true) : ?>
             <p class = 'has-text-grey has-margin-top-10'>
                 <?= Html::a(
-                    $translator->getMessage('Forgot Password', 'user', $locale->language()),
+                    $translator->translate('Forgot Password'),
                     /*$url->generate('recovery/request'), */
                     ['tabindex' => '4'],
                 ) ?>
             </p>
         <?php endif ?>
 
-        <?php if ($isConfirmation === true) : ?>
+        <?php if ($setting->isConfirmation() === true) : ?>
             <p class = 'has-text-grey'>
                 <?= Html::a(
-                    $translator->getMessage("Didn't receive confirmation message", 'user', $locale->language()),
-                    $linkResend,
+                    $translator->translate("Didn't receive confirmation message"),
+                    $urlGenerator->generate('resend'),
                     ['tabindex' => '5'],
                 ) ?>
             </p>

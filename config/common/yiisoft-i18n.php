@@ -8,7 +8,7 @@ return [
     Locale::class => [
         'class' => Locale::class,
         '__construct()' => [
-            $params['app']['language'],
+            $params['yiisoft/i18n']['locale'],
         ],
     ],
 ];

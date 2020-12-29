@@ -1,63 +1,38 @@
 <?php
 
-use Yiisoft\Aliases\Aliases;
 use Yiisoft\Html\Html;
-use Yiisoft\I18n\Locale;
-use Yiisoft\Translator\Message\Php\MessageSource;
+use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\Router\UrlMatcherInterface;
 
 /**
- * @var Aliases Aliases
- * @var Locale $locale
- * @var MessageSource $translator
+ * @var UrlGeneratorInterface $urlGenerator
+ * @var UrlMatcherInterface $urlMatcher
  */
 
 $this->setTitle('404');
 
-$translator = new MessageSource($aliases->get('@user-view-language'));
-
 ?>
 
-<h1 class='is-size-1'>
+<h1 class="is-size-1">
     <b>404</b>
 </h1>
 
-<p class='has-text-danger'>
-    <?= $translator->getMessage('The page', 'user', $locale->language()) ?>
-
-    <span>
-        <b><?= Html::encode($urlMatcher->getCurrentUri()->getPath()) ?></b>
-    </span>
-
-    <?= $translator->getMessage('not found', 'user', $locale->language()) ?> <br/>
-
+<p class="has-text-danger">
+    <?= $translator->translate('The page') ?>
+    <strong><?= Html::encode($urlMatcher->getCurrentUri()->getPath()) ?></strong>
+    <?= $translator->translate('not found') . '.' ?>
 </p>
 
-<p class='has-text-grey'>
+<p class="has-text-grey">
+    <?= $translator->translate(
+        'The above error occurred while the Web server was processing your request'
+    ) . '.' ?>
     <br/>
-        <?= $translator->getMessage(
-            'The above error occurred while the Web server was processing your request',
-            'user',
-            $locale->language()
-        ) ?>
-    <br/>
-
-    <?= $translator->getMessage(
-        'Please contact us if you think this is a server error. thank you.',
-        'user',
-        $locale->language()
-    ) ?>
-
-    <br/>
-
+    <?= $translator->translate('Please contact us if you think this is a server error. Thank you') . '.' ?>
 </p>
 
-<hr class='mb-2'>
+<hr class="mb-2">
 
-<a class ='button is-danger mt-5' href=<?= $urlGenerator->generate('index') ?>>
-    <?= $translator->getMessage(
-        'Go Back Home',
-        'user',
-        $locale->language()
-    ) ?>
-
+<a class ="button is-danger mt-5" href="<?= $urlGenerator->generate('site/index') ?>">
+    <?= $translator->translate('Go Back Home') ?>
 </a>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\User\View\ResendAsset;
+use Yii\Extension\User\View\Asset\Resend;
 use App\Module\User\Form\FormResend;
 use App\Module\User\Repository\ModuleSettingsRepository;
 use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
@@ -30,19 +30,17 @@ $this->setTitle('Resend confirmation message');
 
 $assetManager->register([
     NpmAllAsset::class,
-    ResendAsset::class
+    Resend::class
 ]);
-
-$translator = new MessageSource($aliases->get('@user-view-language'));
 
 ?>
 
 <p class="title has-text-black">
-    <?= $translator->getMessage('Resend confirmation message', 'user', $locale->language()) ?>
+    <?= $translator->translate('Resend confirmation message') ?>
 </p>
 
 <p class="subtitle has-text-black">
-    <?= $translator->getMessage('Please fill out the following', 'user', $locale->language()) ?>
+    <?= $translator->translate('Please fill out the following') ?>
 </p>
 
 <hr class='mb-2'/>
@@ -50,12 +48,12 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
 <div class = 'column is-4 is-offset-4'>
 
     <?= Form::widget()
-        ->action($action)
+        ->action($urlGenerator->generate('resend'))
         ->options(
             [
                 'id' => 'form-registration-resend',
                 'class' => 'forms-registration-resend bg-white shadow-md rounded px-8 pb-8',
-                'csrf' => $csrf
+                'csrf' => $csrf,
             ]
         )
         ->begin() ?>
@@ -63,13 +61,13 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
         <?= $field->config($data, 'email')
             ->textInput(
                 [
-                    'placeholder' => $translator->getMessage('email', 'user', $locale->language()),
+                    'placeholder' => $translator->translate('email'),
                     'tabindex' => '1'
                 ]
             ) ?>
 
         <?= Html::submitButton(
-            $translator->getMessage('Continue', 'user', $locale->language()),
+            $translator->translate('Continue'),
             [
                 'class' => 'button is-block is-info is-fullwidth', 'name' => 'resend-button', 'tabindex' => '2'
             ]
@@ -82,7 +80,7 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
     <?php if ($settings->isRegister()) : ?>
         <p class = 'text-center'>
             <?= Html::a(
-                $translator->getMessage("Don't have an account - Sign up!", 'user', $locale->language()),
+                $translator->translate("Don't have an account - Sign up!"),
                 $urlGenerator->generate('register'),
                 ['tabindex' => '3']
             ) ?>
@@ -91,7 +89,7 @@ $translator = new MessageSource($aliases->get('@user-view-language'));
 
     <p class = 'mt-3 text-center'>
         <?= Html::a(
-            $translator->getMessage('Already registered - Sign in!', 'user', $locale->language()),
+            $translator->translate('Already registered - Sign in!'),
             $urlGenerator->generate('login'),
             ['tabindex' => '4']
         ) ?>

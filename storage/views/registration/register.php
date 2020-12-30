@@ -86,7 +86,7 @@ $assetManager->register([
             <?= Html::submitButton(
                 $translator->translate('Register'),
                 [
-                    'class' => 'button is-block is-info is-fullwidth', 'id' => 'login-button', 'tabindex' => '4'
+                    'class' => 'button is-block is-info is-fullwidth', 'id' => 'register-button', 'tabindex' => '4'
                 ]
             ) ?>
 

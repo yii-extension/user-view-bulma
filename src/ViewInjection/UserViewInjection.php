@@ -11,6 +11,7 @@ use Yiisoft\I18n\Locale;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Router\UrlMatcherInterface;
 use Yiisoft\Translator\Translator;
+use Yiisoft\User\User;
 use Yiisoft\Yii\View\ContentParametersInjectionInterface;
 use Yiisoft\Yii\View\LayoutParametersInjectionInterface;
 
@@ -23,6 +24,7 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
     private Translator $translator;
     private UrlGeneratorInterface $urlGenerator;
     private UrlMatcherInterface $urlMatcher;
+    private User $user;
 
     public function __construct(
         AssetManager $assetManager,
@@ -31,7 +33,8 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         RepositorySetting $setting,
         Translator $translator,
         UrlGeneratorInterface $urlGenerator,
-        UrlMatcherInterface $urlMatcher
+        UrlMatcherInterface $urlMatcher,
+        User $user
     ) {
         $this->assetManager = $assetManager;
         $this->field = $field;
@@ -40,6 +43,7 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->urlMatcher = $urlMatcher;
+        $this->user = $user;
     }
 
     public function getContentParameters(): array
@@ -62,6 +66,7 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
             'translator' => $this->translator,
             'urlGenerator' => $this->urlGenerator,
             'urlMatcher' => $this->urlMatcher,
+            'user' => $this->user,
         ];
     }
 }

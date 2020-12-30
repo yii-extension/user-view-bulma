@@ -8,8 +8,8 @@
 
 [![Total Downloads](https://poser.pugx.org/yii-extension/user-view-bulma/downloads.png)](https://packagist.org/packages/yii-extension/user-view-bulma)
 [![Build Status](https://github.com/yii-extension/user-view-bulma/workflows/build/badge.svg)](https://github.com/yii-extension/user-view-bulma/actions?query=workflow%3Abuild)
-[![codecov](https://codecov.io/gh/yii-extension/user-view-bulma/branch/main/graph/badge.svg?token=KB6T5KMGED)](https://codecov.io/gh/yii-extension/user-view-bulma)
 [![static analysis](https://github.com/yii-extension/user-view-bulma/workflows/static%20analysis/badge.svg)](https://github.com/yii-extension/user-view-bulma/actions?query=workflow%3A%22static+analysis%22)
+[![type-coverage](https://shepherd.dev/github/yii-extension/user-view-bulma/coverage.svg)](https://shepherd.dev/github/yii-extension/user-view-bulma)
 
 
 ## Installation

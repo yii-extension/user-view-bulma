@@ -37,7 +37,7 @@ $assetManager->register([
 ?>
 
 <p class="title has-text-black">
-    <?= $translator->translate('Sing in') ?>
+    <?= $translator->translate('Sign in') ?>
 </p>
 
 <p class="subtitle has-text-black">

@@ -44,7 +44,7 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 
 ### License
 
-The user-view-bulma for Yii Packages is free software. It is released under the terms of the BSD License.
+The View for extension user with bulma css framework for Yii Packages is free software. It is released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Extension](https://github.com/yii-extension).

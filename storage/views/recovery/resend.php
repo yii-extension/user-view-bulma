@@ -3,27 +3,25 @@
 declare(strict_types=1);
 
 use Yii\Extension\User\View\Asset\Resend;
-use Yii\Extension\User\Form\FormResend;
-use Yii\Extension\User\Repository\RepositorySetting;
+use Yii\Extension\User\Settings\RepositorySetting;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
-use Yiisoft\I18n\Locale;
 use Yiisoft\Router\UrlGeneratorInterface;
-use Yiisoft\Translator\Message\Php\MessageSource;
+use Yiisoft\Translator\Translator;
 
 $this->setTitle('Resend confirmation message');
 
 /**
  * @var AssetManager $assetManager
  * @var string|null $csrf
- * @var FormResend $data
+ * @var FormModelInterface $data
  * @var Field $field
- * @var Locale $locale
  * @var RepositorySetting $setting
  * @var UrlGeneratorInterface $urlGenerator
- * @var MessageSource $translator
+ * @var Translator $translator
  */
 
 $assetManager->register([

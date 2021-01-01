@@ -3,22 +3,26 @@
 declare(strict_types=1);
 
 use Yii\Extension\User\View\Asset\Request;
-use Yii\Extension\User\Form\FormRequest;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;
-
-$this->setTitle('Recover your password.');
+use Yiisoft\Translator\Translator;
+use yiisoft\View\WebView;
 
 /**
  * @var AssetManager $assetManager
  * @var string|null $csrf
- * @var FormRequest $data
+ * @var FormModelInterface $data
  * @var Field $field
+ * @var Translator $translator
  * @var UrlGeneratorInterface $urlGenerator
+ * @var WebView $this
  */
+
+$this->setTitle('Recover your password.');
 
 $assetManager->register([
     Request::class

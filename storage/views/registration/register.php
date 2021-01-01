@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\User\RepositorySettings;
-use Yii\Extension\User\Form\RegisterForm;
+use Yii\Extension\User\Settings\RepositorySetting;
 use Yii\Extension\User\View\Asset\Register;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
-use Yiisoft\I18n\Locale;
 use Yiisoft\Router\UrlGeneratorInterface;
-use Yiisoft\Translator\Message\Php\MessageSource;
+use Yiisoft\Translator\Translator;
 
 $this->setTitle('Register');
 
@@ -19,12 +18,11 @@ $this->setTitle('Register');
   * @var string $action
   * @var AssetManager $assetManager
   * @var string|null $csrf
-  * @var RegisterForm $data
+  * @var FormModelInterface $data
   * @var Field $field
-  * @var Locale $locale
-  * @var RepositorySettings $settings
-  * @var UrlGeneratorInterface $url
-  * @var MessageSource $translator
+  * @var RepositorySetting $setting
+  * @var UrlGeneratorInterface $urlGenerator
+  * @var Translator $translator
   */
 
 $assetManager->register([

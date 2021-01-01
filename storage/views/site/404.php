@@ -3,10 +3,12 @@
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Router\UrlMatcherInterface;
+use Yiisoft\Translator\Translator
 
 /**
  * @var UrlGeneratorInterface $urlGenerator
  * @var UrlMatcherInterface $urlMatcher
+ * @var Translator $translator
  */
 
 $this->setTitle('404');

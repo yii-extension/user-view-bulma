@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
 use Yii\Extension\User\View\Asset\Login;
-use Yiisoft\Aliases\Aliases;
+use Yii\Extension\User\Settings\RepositorySetting;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
-use Yiisoft\I18n\Locale;
-use Yiisoft\Translator\Message\Php\MessageSource;
+use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\Translator\Translator;
 use Yiisoft\View\WebView;
 
 /**
- * @var Aliases Aliases
  * @var string $action
  * @var AssetManager $assetManager
  * @var string|null $csrf
  * @var FormModelInterface $data
  * @var Field $field
- * @var bool $isPasswordRecovery
- * @var string $linkResend
- * @var Locale $locale
+ * @var RepositorySetting $setting
+ * @var Translator $translator
+ * @var UrlGeneratorInterface $urlGenerator
  * @var WebView $this
  */
 

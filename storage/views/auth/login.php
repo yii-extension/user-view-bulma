@@ -37,7 +37,7 @@ $assetManager->register([
 ?>
 
 <h1 class="title has-text-black">
-    <?= $translator->translate('Sign in') ?>
+    <?= $translator->translate('Login') ?>
 </h1>
 
 <hr class='mb-2'/>
@@ -111,9 +111,19 @@ $assetManager->register([
         <?php if ($setting->isPasswordRecovery()) : ?>
             <p class = 'has-text-grey has-margin-top-10'>
                 <?= Html::a(
-                    $translator->translate('Recovery your password'),
+                    $translator->translate('Forgot password'),
                     $urlGenerator->generate('request'),
                     ['tabindex' => '4'],
+                ) ?>
+            </p>
+        <?php endif ?>
+
+        <?php if ($setting->isRegister()) : ?>
+            <p class="has-text-grey">
+                <?= Html::a(
+                    $translator->translate('Don\'t have an account - Sign up!'),
+                    $urlGenerator->generate('register'),
+                    ['tabindex' => '5'],
                 ) ?>
             </p>
         <?php endif ?>
@@ -123,7 +133,7 @@ $assetManager->register([
                 <?= Html::a(
                     $translator->translate("Didn't receive confirmation message"),
                     $urlGenerator->generate('resend'),
-                    ['tabindex' => '5'],
+                    ['tabindex' => '6'],
                 ) ?>
             </p>
         <?php endif ?>

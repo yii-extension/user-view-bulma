@@ -36,13 +36,9 @@ $assetManager->register([
 
 ?>
 
-<p class="title has-text-black">
+<h1 class="title has-text-black">
     <?= $translator->translate('Sign in') ?>
-</p>
-
-<p class="subtitle has-text-black">
-    <?= $translator->translate('Please fill out the following') ?>
-</p>
+</h1>
 
 <hr class='mb-2'/>
 
@@ -76,7 +72,8 @@ $assetManager->register([
             ->action($urlGenerator->generate('login'))
             ->options(
                 [
-                    'id' => 'form-security-login',
+                    'id' => 'form-auth-login',
+                    'class' => 'forms-auth-login bg-white shadow-md rounded px-8 pb-8',
                     'csrf' => $csrf,
                 ]
             )
@@ -85,6 +82,7 @@ $assetManager->register([
             <?= $field->config($data, 'login')
                 ->textInput(
                     [
+                        'autofocus' => true,
                         'placeholder' => $translator->translate('Username'),
                         'tabindex' => '1'
                     ]
@@ -113,8 +111,8 @@ $assetManager->register([
         <?php if ($setting->isPasswordRecovery() === true) : ?>
             <p class = 'has-text-grey has-margin-top-10'>
                 <?= Html::a(
-                    $translator->translate('Forgot Password'),
-                    /*$url->generate('recovery/request'), */
+                    $translator->translate('Recover your password'),
+                    $urlGenerator->generate('request'),
                     ['tabindex' => '4'],
                 ) ?>
             </p>

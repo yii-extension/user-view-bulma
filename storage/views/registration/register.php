@@ -33,13 +33,9 @@ $assetManager->register([
 
 ?>
 
-<p class="title has-text-black">
+<h1 class="title has-text-black">
     <?= $translator->translate('Register') . '.' ?>
-</p>
-
-<p class="subtitle has-text-black">
-    <?= $translator->translate('Please fill out the following') ?>
-</p>
+</h1>
 
 <hr class='mb-2'/>
 
@@ -59,6 +55,7 @@ $assetManager->register([
         <?= $field->config($data, 'email')
             ->textInput(
                 [
+                    'autofocus' => true,
                     'placeholder' => $translator->translate('Email'),
                     'tabindex' => '1'
                 ]

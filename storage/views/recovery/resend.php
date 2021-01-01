@@ -3,9 +3,8 @@
 declare(strict_types=1);
 
 use Yii\Extension\User\View\Asset\Resend;
-use App\Module\User\Form\FormResend;
-use App\Module\User\Repository\ModuleSettingsRepository;
-use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
+use Yii\Extension\User\Form\FormResend;
+use Yii\Extension\User\Repository\RepositorySetting;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
@@ -17,7 +16,6 @@ use Yiisoft\Translator\Message\Php\MessageSource;
 $this->setTitle('Resend confirmation message');
 
 /**
- * @var string $action
  * @var AssetManager $assetManager
  * @var string|null $csrf
  * @var FormResend $data
@@ -29,19 +27,14 @@ $this->setTitle('Resend confirmation message');
  */
 
 $assetManager->register([
-    NpmAllAsset::class,
     Resend::class
 ]);
 
 ?>
 
-<p class="title has-text-black">
+<h1 class="title has-text-black">
     <?= $translator->translate('Resend confirmation message') ?>
-</p>
-
-<p class="subtitle has-text-black">
-    <?= $translator->translate('Please fill out the following') ?>
-</p>
+</h1>
 
 <hr class='mb-2'/>
 
@@ -61,6 +54,7 @@ $assetManager->register([
         <?= $field->config($data, 'email')
             ->textInput(
                 [
+                    'autofocus' => true,
                     'placeholder' => $translator->translate('email'),
                     'tabindex' => '1'
                 ]
@@ -77,7 +71,7 @@ $assetManager->register([
 
     <hr class='mb-2'/>
 
-    <?php if ($settings->isRegister()) : ?>
+    <?php if ($setting->isRegister()) : ?>
         <p class = 'text-center'>
             <?= Html::a(
                 $translator->translate("Don't have an account - Sign up!"),

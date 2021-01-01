@@ -108,17 +108,17 @@ $assetManager->register([
 
         <?= Form::end() ?>
 
-        <?php if ($setting->isPasswordRecovery() === true) : ?>
+        <?php if ($setting->isPasswordRecovery()) : ?>
             <p class = 'has-text-grey has-margin-top-10'>
                 <?= Html::a(
-                    $translator->translate('Recover your password'),
+                    $translator->translate('Recovery your password'),
                     $urlGenerator->generate('request'),
                     ['tabindex' => '4'],
                 ) ?>
             </p>
         <?php endif ?>
 
-        <?php if ($setting->isConfirmation() === true) : ?>
+        <?php if ($setting->isConfirmation()) : ?>
             <p class = 'has-text-grey'>
                 <?= Html::a(
                     $translator->translate("Didn't receive confirmation message"),

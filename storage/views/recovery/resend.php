@@ -44,8 +44,8 @@ $assetManager->register([
         ->action($urlGenerator->generate('resend'))
         ->options(
             [
-                'id' => 'form-registration-resend',
-                'class' => 'forms-registration-resend bg-white shadow-md rounded px-8 pb-8',
+                'id' => 'form-recovery-resend',
+                'class' => 'forms-recovery-resend bg-white shadow-md rounded px-8 pb-8',
                 'csrf' => $csrf,
             ]
         )

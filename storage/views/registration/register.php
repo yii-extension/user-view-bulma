@@ -3,32 +3,27 @@
 declare(strict_types=1);
 
 use Yii\Extension\User\Settings\RepositorySetting;
-use Yii\Extension\User\View\Asset\Register;
-use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\Translator;
+use Yiisoft\View\WebView;
+
+/**
+ * @var string|null $csrf
+ * @var FormModelInterface $data
+ * @var Field $field
+ * @var RepositorySetting $repositorySetting
+ * @var UrlGeneratorInterface $urlGenerator
+ * @var Translator $translator
+ * @var WebView $this
+ *
+ * @psalm-suppress InvalidScope
+ */
 
 $this->setTitle('Register');
-
- /**
-  * @var string $action
-  * @var AssetManager $assetManager
-  * @var string|null $csrf
-  * @var FormModelInterface $data
-  * @var Field $field
-  * @var RepositorySetting $setting
-  * @var UrlGeneratorInterface $urlGenerator
-  * @var Translator $translator
-  */
-
-$assetManager->register([
-    Register::class
-]);
-
 ?>
 
 <h1 class="title has-text-black">
@@ -50,31 +45,12 @@ $assetManager->register([
         )
         ->begin() ?>
 
-        <?= $field->config($data, 'email')
-            ->textInput(
-                [
-                    'autofocus' => true,
-                    'placeholder' => $translator->translate('Email'),
-                    'tabindex' => '1'
-                ]
-            ) ?>
+        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
-        <?= $field->config($data, 'username')
-            ->textInput(
-                [
-                    'placeholder' => $translator->translate('Username'),
-                    'tabindex' => '2'
-                ]
-            ) ?>
+        <?= $field->config($data, 'username')->textInput(['tabindex' => '2']) ?>
 
-        <?php if ($setting->isGeneratingPassword() === false) : ?>
-            <?= $field->config($data, 'password')
-                ->passwordInput(
-                    [
-                        'placeholder' => $translator->translate('Password'),
-                        'tabindex' => '3'
-                    ]
-                ) ?>
+        <?php if ($repositorySetting->isGeneratingPassword() === false) : ?>
+            <?= $field->config($data, 'password')->passwordInput(['tabindex' => '3']) ?>
         <?php endif ?>
 
         <div class = 'flex items-center justify-between'>

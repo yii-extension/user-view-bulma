@@ -6,6 +6,7 @@ namespace Yii\Extension\User\View\ViewInjection;
 
 use Yii\Extension\User\Settings\RepositorySetting;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Router\UrlGeneratorInterface;
@@ -20,7 +21,8 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
     private AssetManager $assetManager;
     private Field $field;
     private Locale $locale;
-    private RepositorySetting $setting;
+    private array $params;
+    private RepositorySetting $repositorySetting;
     private Translator $translator;
     private UrlGeneratorInterface $urlGenerator;
     private UrlMatcherInterface $urlMatcher;
@@ -30,7 +32,7 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         AssetManager $assetManager,
         Field $field,
         Locale $locale,
-        RepositorySetting $setting,
+        RepositorySetting $repositorySetting,
         Translator $translator,
         UrlGeneratorInterface $urlGenerator,
         UrlMatcherInterface $urlMatcher,
@@ -39,11 +41,15 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         $this->assetManager = $assetManager;
         $this->field = $field;
         $this->locale = $locale;
-        $this->setting = $setting;
+        $this->repositorySetting = $repositorySetting;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->urlMatcher = $urlMatcher;
         $this->user = $user;
+
+        $this->params = require Builder::path('params');
+
+        $this->registerAsset();
     }
 
     public function getContentParameters(): array
@@ -51,7 +57,7 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         return [
             'assetManager' => $this->assetManager,
             'field' => $this->field,
-            'setting' => $this->setting,
+            'repositorySetting' => $this->repositorySetting,
             'translator' => $this->translator,
             'urlGenerator' => $this->urlGenerator,
             'urlMatcher' => $this->urlMatcher,
@@ -68,5 +74,14 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
             'urlMatcher' => $this->urlMatcher,
             'user' => $this->user,
         ];
+    }
+
+    private function registerAsset(): void
+    {
+        if ($this->params['yii-extension/user-view-bulma']['registerAsset']) {
+            $this->assetManager->register(
+                $this->params['yii-extension/user-view-bulma']['assetClass']
+            );
+        }
     }
 }

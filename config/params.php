@@ -2,11 +2,17 @@
 
 declare(strict_types=1);
 
+use Yii\Extension\User\View\Asset\User;
 use Yii\Extension\User\View\ViewInjection\UserViewInjection;
 use Yiisoft\Factory\Definitions\Reference;
 use Yiisoft\Yii\View\CsrfViewInjection;
 
 return [
+    'yii-extension/user-view-bulma' => [
+        'assetClass' => [User::class],
+        'registerAsset' => true,
+    ],
+
     'yiisoft/aliases' => [
         'aliases' => [
             '@user-view-css' =>  dirname(__DIR__) . '/storage/asset/css',

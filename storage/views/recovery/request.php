@@ -2,32 +2,26 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\User\View\Asset\Request;
-use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\Translator;
-use yiisoft\View\WebView;
+use Yiisoft\View\WebView;
 
 /**
- * @var AssetManager $assetManager
  * @var string|null $csrf
  * @var FormModelInterface $data
  * @var Field $field
  * @var Translator $translator
  * @var UrlGeneratorInterface $urlGenerator
  * @var WebView $this
+ *
+ * @psalm-suppress InvalidScope
  */
 
 $this->setTitle('Recover your password.');
-
-$assetManager->register([
-    Request::class
-]);
-
 ?>
 
 <h1 class="title has-text-black">
@@ -49,14 +43,7 @@ $assetManager->register([
         )
         ->begin() ?>
 
-        <?= $field->config($data, 'email')
-            ->textInput(
-                [
-                    'autofocus' => true,
-                    'placeholder' => $translator->translate('Username'),
-                    'tabindex' => '1'
-                ]
-            ) ?>
+        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
         <div class = 'flex items-center justify-between'>
             <?= Html::submitButton(

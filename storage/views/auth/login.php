@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
-use Yii\Extension\User\View\Asset\Login;
 use Yii\Extension\User\Settings\RepositorySetting;
-use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
@@ -15,24 +12,18 @@ use Yiisoft\Translator\Translator;
 use Yiisoft\View\WebView;
 
 /**
- * @var string $action
- * @var AssetManager $assetManager
  * @var string|null $csrf
  * @var FormModelInterface $data
  * @var Field $field
- * @var RepositorySetting $setting
+ * @var RepositorySetting $repositorySetting
  * @var Translator $translator
  * @var UrlGeneratorInterface $urlGenerator
  * @var WebView $this
+ *
+ * @psalm-suppress InvalidScope
  */
 
 $this->setTitle('Login');
-
-$assetManager->register([
-    NpmAllAsset::class,
-    Login::class,
-]);
-
 ?>
 
 <h1 class="title has-text-black">
@@ -78,22 +69,9 @@ $assetManager->register([
             )
             ->begin() ?>
 
-            <?= $field->config($data, 'login')
-                ->textInput(
-                    [
-                        'autofocus' => true,
-                        'placeholder' => $translator->translate('Username'),
-                        'tabindex' => '1'
-                    ]
-                ) ?>
+            <?= $field->config($data, 'login')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
-            <?= $field->config($data, 'password')
-                ->passwordInput(
-                    [
-                        'placeholder' => $translator->translate('Password'),
-                        'tabindex' => '2'
-                    ]
-                ) ?>
+            <?= $field->config($data, 'password')->passwordInput(['tabindex' => '2']) ?>
 
             <?= Html::submitButton(
                 $translator->translate('Login') . ' ' .
@@ -107,7 +85,7 @@ $assetManager->register([
 
         <?= Form::end() ?>
 
-        <?php if ($setting->isPasswordRecovery()) : ?>
+        <?php if ($repositorySetting->isPasswordRecovery()) : ?>
             <p class = 'has-text-grey has-margin-top-10'>
                 <?= Html::a(
                     $translator->translate('Forgot password'),
@@ -117,7 +95,7 @@ $assetManager->register([
             </p>
         <?php endif ?>
 
-        <?php if ($setting->isRegister()) : ?>
+        <?php if ($repositorySetting->isRegister()) : ?>
             <p class="has-text-grey">
                 <?= Html::a(
                     $translator->translate('Don\'t have an account - Sign up!'),
@@ -127,7 +105,7 @@ $assetManager->register([
             </p>
         <?php endif ?>
 
-        <?php if ($setting->isConfirmation()) : ?>
+        <?php if ($repositorySetting->isConfirmation()) : ?>
             <p class = 'has-text-grey'>
                 <?= Html::a(
                     $translator->translate("Didn't receive confirmation message"),

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\User\View\Asset\User;
+use Yii\Extension\User\View\Asset\UserAsset;
 use Yii\Extension\User\View\ViewInjection\UserViewInjection;
 use Yiisoft\Factory\Definitions\Reference;
 use Yiisoft\Yii\View\CsrfViewInjection;
 
 return [
     'yii-extension/user-view-bulma' => [
-        'assetClass' => [User::class],
+        'assetClass' => [UserAsset::class],
         'registerAsset' => true,
     ],
 

@@ -30,10 +30,9 @@ $this->setTitle('Register');
     <?= $translator->translate('Register') . '.' ?>
 </h1>
 
-<hr class='mb-2'/>
+<hr class="mb-2"/>
 
-<div class = 'column is-4 is-offset-4'>
-
+<div class="column is-4 is-offset-4">
     <?= Form::widget()
         ->action($urlGenerator->generate('register'))
         ->options(
@@ -53,19 +52,16 @@ $this->setTitle('Register');
             <?= $field->config($data, 'password')->passwordInput(['tabindex' => '3']) ?>
         <?php endif ?>
 
-        <div class = 'flex items-center justify-between'>
-            <?= Html::submitButton(
-                $translator->translate('Register'),
-                [
-                    'class' => 'button is-block is-info is-fullwidth', 'id' => 'register-button', 'tabindex' => '4'
-                ]
-            ) ?>
+        <?= Html::submitButton(
+            $translator->translate('Register'),
+            [
+                'class' => 'button is-block is-info is-fullwidth', 'id' => 'register-button', 'tabindex' => '4'
+            ]
+        ) ?>
 
-        </div>
+        <hr class="mt-1"/>
 
-        <hr class='mb-2'/>
-
-        <div class = 'text-center pt-3'>
+        <div class="text-center">
             <?= Html::a(
                 $translator->translate('Already registered - Sign in!'),
                 $urlGenerator->generate('login'),
@@ -74,5 +70,4 @@ $this->setTitle('Register');
         </div>
 
     <?php Form::end() ?>
-
 </div>

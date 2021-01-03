@@ -13,3 +13,7 @@
 .input:-ms-input-placeholder, .textarea:-ms-input-placeholder, .select select:-ms-input-placeholder {
   color: hsl(0, 0%, 40%);
 }
+
+a:hover {
+    color: hsl(217, 71%, 53%) !important;
+}

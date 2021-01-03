@@ -13,10 +13,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "yii-extension/fontawesome": "^1.0@dev",
         "yii-extension/user-settings": "^1.0@dev",
         "yiisoft/assets": "^1.0@dev",
-        "yiisoft/composer-config-plugin": "^1.0@dev",
         "yiisoft/form": "^1.0@dev",
         "yiisoft/i18n": "^1.0.0",
         "yiisoft/router": "^3.0@dev",

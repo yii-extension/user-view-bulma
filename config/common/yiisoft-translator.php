@@ -12,6 +12,8 @@ use Yiisoft\Translator\Translator;
 use Yiisoft\Translator\Message\Php\MessageSource;
 use Yiisoft\Translator\Formatter\Intl\IntlMessageFormatter;
 
+/** @var array $params */
+
 return [
     MessageReaderInterface::class => [
         '__class' => MessageSource::class,

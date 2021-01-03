@@ -30,34 +30,10 @@ $this->setTitle('Login');
     <?= $translator->translate('Login') ?>
 </h1>
 
-<hr class='mb-2'/>
+<hr class="mb-2"/>
 
-<div class = 'column is-4 is-offset-4'>
-
-    <div class = 'box'>
-
-        <div class = 'buttons justify-center has-margin-bottom-10'>
-
-            <button class = 'button is-medium is-black'>
-                <span class = 'icon is-medium'>
-                    <i class = 'fab fa-github fa-2x fa-inverse'></i>
-                </span>
-            </button>
-
-            <button class = 'button is-medium is-black'>
-                <span class = 'icon is-medium'>
-                    <i class = 'fab fa-yandex fa-2x fa-inverse'></i>
-                </span>
-            </button>
-
-            <button class = 'button is-medium is-black'>
-            <span class = 'icon is-medium'>
-                    <i class = 'fab fa-google fa-2x fa-inverse'></i>
-                </span>
-            </button>
-
-        </div>
-
+<div class="column is-4 is-offset-4">
+    <div class="box">
         <?= Form::widget()
             ->action($urlGenerator->generate('login'))
             ->options(
@@ -85,36 +61,36 @@ $this->setTitle('Login');
 
         <?= Form::end() ?>
 
+        <hr class="mt-1"/>
+
         <?php if ($repositorySetting->isPasswordRecovery()) : ?>
-            <p class = 'has-text-grey has-margin-top-10'>
+            <div class="text-center">
                 <?= Html::a(
                     $translator->translate('Forgot password'),
                     $urlGenerator->generate('request'),
                     ['tabindex' => '4'],
                 ) ?>
-            </p>
+            </div>
         <?php endif ?>
 
         <?php if ($repositorySetting->isRegister()) : ?>
-            <p class="has-text-grey">
+            <div class="text-center">
                 <?= Html::a(
                     $translator->translate('Don\'t have an account - Sign up!'),
                     $urlGenerator->generate('register'),
                     ['tabindex' => '5'],
                 ) ?>
-            </p>
+            </div>
         <?php endif ?>
 
         <?php if ($repositorySetting->isConfirmation()) : ?>
-            <p class = 'has-text-grey'>
+            <div class="text-center">
                 <?= Html::a(
                     $translator->translate("Didn't receive confirmation message"),
                     $urlGenerator->generate('resend'),
                     ['tabindex' => '6'],
                 ) ?>
-            </p>
+            </div>
         <?php endif ?>
-
     </div>
-
 </div>

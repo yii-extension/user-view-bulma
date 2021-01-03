@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Yii\Extension\User\View\ViewInjection;
 
 use Yii\Extension\User\Settings\RepositorySetting;
+use Yii\Extension\User\View\Parameter\UserParameter;
 use Yiisoft\Assets\AssetManager;
-use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Router\UrlGeneratorInterface;
@@ -21,12 +21,12 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
     private AssetManager $assetManager;
     private Field $field;
     private Locale $locale;
-    private array $params;
     private RepositorySetting $repositorySetting;
     private Translator $translator;
     private UrlGeneratorInterface $urlGenerator;
     private UrlMatcherInterface $urlMatcher;
     private User $user;
+    private UserParameter $userParameter;
 
     public function __construct(
         AssetManager $assetManager,
@@ -36,7 +36,8 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         Translator $translator,
         UrlGeneratorInterface $urlGenerator,
         UrlMatcherInterface $urlMatcher,
-        User $user
+        User $user,
+        UserParameter $userParameter
     ) {
         $this->assetManager = $assetManager;
         $this->field = $field;
@@ -46,9 +47,7 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
         $this->urlGenerator = $urlGenerator;
         $this->urlMatcher = $urlMatcher;
         $this->user = $user;
-
-        $this->params = require Builder::path('params');
-
+        $this->userParameter = $userParameter;
         $this->registerAsset();
     }
 
@@ -78,9 +77,9 @@ final class UserViewInjection implements ContentParametersInjectionInterface, La
 
     private function registerAsset(): void
     {
-        if ($this->params['yii-extension/user-view-bulma']['registerAsset']) {
+        if ($this->userParameter->isRegisteredAsset()) {
             $this->assetManager->register(
-                $this->params['yii-extension/user-view-bulma']['assetClass']
+                $this->userParameter->getAssetClass(),
             );
         }
     }

@@ -30,10 +30,9 @@ $this->setTitle('Reset your password.');
     <?= $translator->translate('Reset your password') ?>
 </h1>
 
-<hr class='mb-2'/>
+<hr class="mb-2"/>
 
-<div class = 'column is-4 is-offset-4'>
-
+<div class="column is-4 is-offset-4">
     <?= Form::widget()
         ->action($urlGenerator->generate('reset', ['id' => $id, 'code' => $code]))
         ->options(
@@ -57,5 +56,4 @@ $this->setTitle('Reset your password.');
         ) ?>
 
     <?php Form::end() ?>
-
 </div>

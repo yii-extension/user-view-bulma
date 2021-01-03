@@ -28,10 +28,9 @@ $this->setTitle('Recover your password.');
     <?= $translator->translate('Recover your password') ?>
 </h1>
 
-<hr class='mb-2'/>
+<hr class="mb-2"/>
 
-<div class = 'column is-4 is-offset-4'>
-
+<div class="column is-4 is-offset-4">
     <?= Form::widget()
         ->action($urlGenerator->generate('request'))
         ->options(
@@ -45,27 +44,24 @@ $this->setTitle('Recover your password.');
 
         <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
-        <div class = 'flex items-center justify-between'>
-            <?= Html::submitButton(
-                $translator->translate('Continue'),
-                [
-                    'class' => 'button is-block is-info is-fullwidth',
-                    'name' => 'request-button',
-                    'tabindex' => '2'
-                ]
-            ) ?>
-
-            <hr class='mb-2'/>
-        </div>
-
-        <div class = 'text-center pt-3'>
-            <?= Html::a(
-                $translator->translate('Already registered - Sign in!'),
-                $urlGenerator->generate('login'),
-                ['tabindex' => '3']
-            ) ?>
-        </div>
+        <?= Html::submitButton(
+            $translator->translate('Continue'),
+            [
+                'class' => 'button is-block is-info is-fullwidth',
+                'name' => 'request-button',
+                'tabindex' => '2'
+            ]
+        ) ?>
 
     <?php Form::end() ?>
 
+    <hr class="mt-1"/>
+
+    <div class="text-center">
+        <?= Html::a(
+            $translator->translate('Already registered - Sign in!'),
+            $urlGenerator->generate('login'),
+            ['tabindex' => '3']
+        ) ?>
+    </div>
 </div>

@@ -30,10 +30,9 @@ $this->setTitle('Resend confirmation message');
     <?= $translator->translate('Resend confirmation message') ?>
 </h1>
 
-<hr class='mb-2'/>
+<hr class="mb-2"/>
 
-<div class = 'column is-4 is-offset-4'>
-
+<div class="column is-4 is-offset-4">
     <?= Form::widget()
         ->action($urlGenerator->generate('resend'))
         ->options(
@@ -56,10 +55,10 @@ $this->setTitle('Resend confirmation message');
 
     <?php Form::end(); ?>
 
-    <hr class='mb-2'/>
+    <hr class="mt-1"/>
 
     <?php if ($repositorySetting->isRegister()) : ?>
-        <p class = 'text-center'>
+        <div class="text-center">
             <?= Html::a(
                 $translator->translate("Don't have an account - Sign up!"),
                 $urlGenerator->generate('register'),
@@ -68,12 +67,11 @@ $this->setTitle('Resend confirmation message');
         </p>
     <?php endif ?>
 
-    <p class = 'mt-3 text-center'>
+    <div class="text-center">
         <?= Html::a(
             $translator->translate('Already registered - Sign in!'),
             $urlGenerator->generate('login'),
             ['tabindex' => '4']
         ) ?>
-    </p>
-
+    </div>
 </div>

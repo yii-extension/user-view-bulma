@@ -9,8 +9,10 @@ use Yiisoft\Yii\View\CsrfViewInjection;
 
 return [
     'yii-extension/user-view-bulma' => [
-        'assetClass' => [UserAsset::class],
+        'assetClass' => UserAsset::class,
         'registerAsset' => true,
+        'registerBulmaAsset' => true,
+        'registerFontAwesomeIconsAsset' => true,
     ],
 
     'yiisoft/aliases' => [

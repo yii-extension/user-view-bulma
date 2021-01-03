@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yii\Extension\User\View\Asset;
 
+use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaHelpersAsset;
@@ -21,5 +22,6 @@ final class UserAsset extends AssetBundle
     public array $depends = [
         BulmaAsset::class,
         BulmaHelpersAsset::class,
+        NpmAllAsset::class,
     ];
 }

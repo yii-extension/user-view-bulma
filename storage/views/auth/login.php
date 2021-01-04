@@ -103,12 +103,7 @@ $tab = 0;
                 ) ?>
             <?php endif ?>
 
-            <?= Html::ul(
-                $items,
-                [
-                    'encode' => false,
-                ]
-            ); ?>
+            <?= Html::ul($items, ['encode' => false]) ?>
 
             <hr class="pb-3"/>
         </footer>

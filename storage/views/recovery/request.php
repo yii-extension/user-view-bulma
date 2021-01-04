@@ -81,13 +81,7 @@ $tab = 0;
                 ['tabindex' => ++$tab],
             ) ?>
 
-            <?= Html::ul(
-                $items,
-                [
-                    'encode' => false,
-                    'itemOptions' => ['class' => 'text-center'],
-                ]
-            ) ?>
+            <?= Html::ul($items, ['encode' => false]) ?>
 
             <hr class="pb-3"/>
         </footer>

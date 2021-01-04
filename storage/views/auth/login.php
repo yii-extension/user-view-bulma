@@ -38,72 +38,79 @@ $items = [];
 $tab = 0;
 ?>
 
-<h1 class="title has-text-black">
-    <?= $title ?>
-</h1>
-
-<hr class="mb-2"/>
-
 <div class="column is-4 is-offset-4">
-    <div class="box">
-        <?= Form::widget()
-            ->action($urlGenerator->generate('login'))
-            ->options(
+    <div class="card">
+        <header class="card-header">
+            <h1 class="card-header-title has-text-black is-justify-content-center title">
+                <?= $title ?>
+            </h1>
+        </header>
+
+        <div class="card-content">
+            <div class="content">
+                <?= Form::widget()
+                    ->action($urlGenerator->generate('login'))
+                    ->options(
+                        [
+                            'class' => 'forms-auth-login',
+                            'csrf' => $csrf,
+                            'id' => 'form-auth-login',
+                        ]
+                    )
+                    ->begin() ?>
+
+                    <?= $field->config($data, 'login')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+
+                    <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
+
+                    <?= Html::submitButton(
+                        Html::encode($translator->translate('Login')),
+                        [
+                            'class' => 'button is-block is-info is-fullwidth',
+                            'id' => 'login-button',
+                            'tabindex' => ++$tab,
+                        ]
+                    ) ?>
+
+                <?= Form::end() ?>
+            </div>
+        </div>
+
+        <footer class="card-footer is-justify-content-center">
+            <hr class="mt-1"/>
+
+            <?php if ($repositorySetting->isPasswordRecovery()) : ?>
+                <?php $items[] = Html::a(
+                    Html::encode($translator->translate('Forgot password')),
+                    $urlGenerator->generate('request'),
+                    ['tabindex' => ++$tab],
+                ) ?>
+            <?php endif ?>
+
+            <?php if ($repositorySetting->isRegister()) : ?>
+                <?php $items[] = Html::a(
+                    Html::encode($translator->translate('Don\'t have an account - Sign up!')),
+                    $urlGenerator->generate('register'),
+                    ['tabindex' => ++$tab],
+                ) ?>
+            <?php endif ?>
+
+            <?php if ($repositorySetting->isConfirmation()) : ?>
+                <?php $items[] = Html::a(
+                    Html::encode($translator->translate("Didn't receive confirmation message")),
+                    $urlGenerator->generate('resend'),
+                    ['tabindex' => ++$tab],
+                ) ?>
+            <?php endif ?>
+
+            <?= Html::ul(
+                $items,
                 [
-                    'id' => 'form-auth-login',
-                    'class' => 'forms-auth-login bg-white shadow-md rounded px-8 pb-8',
-                    'csrf' => $csrf,
+                    'encode' => false,
                 ]
-            )
-            ->begin() ?>
+            ); ?>
 
-            <?= $field->config($data, 'login')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
-
-            <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
-
-            <?= Html::submitButton(
-                Html::encode($translator->translate('Login')),
-                [
-                    'class' => 'button is-block is-info is-fullwidth',
-                    'id' => 'login-button',
-                    'tabindex' => ++$tab,
-                ]
-            ) ?>
-
-        <?= Form::end() ?>
-
-        <hr class="mt-1"/>
-
-        <?php if ($repositorySetting->isPasswordRecovery()) : ?>
-            <?php $items[] = Html::a(
-                Html::encode($translator->translate('Forgot password')),
-                $urlGenerator->generate('request'),
-                ['tabindex' => ++$tab],
-            ) ?>
-        <?php endif ?>
-
-        <?php if ($repositorySetting->isRegister()) : ?>
-            <?php $items[] = Html::a(
-                Html::encode($translator->translate('Don\'t have an account - Sign up!')),
-                $urlGenerator->generate('register'),
-                ['tabindex' => ++$tab],
-            ) ?>
-        <?php endif ?>
-
-        <?php if ($repositorySetting->isConfirmation()) : ?>
-            <?php $items[] = Html::a(
-                Html::encode($translator->translate("Didn't receive confirmation message")),
-                $urlGenerator->generate('resend'),
-                ['tabindex' => ++$tab],
-            ) ?>
-        <?php endif ?>
-
-        <?= Html::ul(
-            $items,
-            [
-                'encode' => false,
-                'itemOptions' => ['class' => 'text-center'],
-            ]
-        ); ?>
+            <hr class="pb-3"/>
+        </footer>
     </div>
 </div>

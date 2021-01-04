@@ -38,56 +38,66 @@ $items = [];
 $tab = 0;
 ?>
 
-<h1 class="title has-text-black">
-    <?= $title ?>
-</h1>
-
-<hr class="mb-2"/>
-
 <div class="column is-4 is-offset-4">
-    <?= Form::widget()
-        ->action($urlGenerator->generate('register'))
-        ->options(
-            [
-                'id' => 'form-registration-register',
-                'class' => 'forms-registration-register bg-white shadow-md rounded px-8 pb-8',
-                'csrf' => $csrf,
-            ]
-        )
-        ->begin() ?>
+    <div class="card">
+        <header class="card-header">
+            <h1 class="card-header-title has-text-black is-justify-content-center title">
+                <?= $title ?>
+            </h1>
+        </header>
 
-        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+        <div class="card-content">
+            <div class="content">
+                <?= Form::widget()
+                    ->action($urlGenerator->generate('register'))
+                    ->options(
+                        [
+                            'class' => 'forms-registration-register',
+                            'csrf' => $csrf,
+                            'id' => 'form-registration-register',
+                        ]
+                    )
+                    ->begin() ?>
 
-        <?= $field->config($data, 'username')->textInput(['tabindex' => ++$tab]) ?>
+                    <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-        <?php if ($repositorySetting->isGeneratingPassword() === false) : ?>
-            <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
-        <?php endif ?>
+                    <?= $field->config($data, 'username')->textInput(['tabindex' => ++$tab]) ?>
 
-        <?= Html::submitButton(
-            Html::encode($translator->translate('Register')),
-            [
-                'class' => 'button is-block is-info is-fullwidth',
-                'id' => 'register-button',
-                'tabindex' => ++$tab,
-            ]
-        ) ?>
+                    <?php if ($repositorySetting->isGeneratingPassword() === false) : ?>
+                        <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
+                    <?php endif ?>
 
-    <?= Form::end() ?>
+                    <?= Html::submitButton(
+                        Html::encode($translator->translate('Register')),
+                        [
+                            'class' => 'button is-block is-info is-fullwidth',
+                            'id' => 'register-button',
+                            'tabindex' => ++$tab,
+                        ]
+                    ) ?>
 
-    <hr class="mt-1"/>
+                <?= Form::end() ?>
+            </div>
+        </div>
 
-    <?php $items[] = Html::a(
-        Html::encode($translator->translate('Already registered - Sign in!')),
-        $urlGenerator->generate('login'),
-        ['tabindex' => ++$tab],
-    ) ?>
+        <footer class="card-footer is-justify-content-center">
+            <hr class="mt-1"/>
 
-    <?= Html::ul(
-        $items,
-        [
-            'encode' => false,
-            'itemOptions' => ['class' => 'text-center'],
-        ]
-    ); ?>
+            <?php $items[] = Html::a(
+                Html::encode($translator->translate('Already registered - Sign in!')),
+                $urlGenerator->generate('login'),
+                ['tabindex' => ++$tab],
+            ) ?>
+
+            <?= Html::ul(
+                $items,
+                [
+                    'encode' => false,
+                    'itemOptions' => ['class' => 'text-center'],
+                ]
+            ); ?>
+
+            <hr class="pb-3"/>
+        </footer>
+    </div>
 </div>

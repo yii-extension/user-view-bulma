@@ -25,7 +25,7 @@ use Yiisoft\View\WebView;
  * @psalm-suppress InvalidScope
  */
 
-$title = Html::encode($translator->translate('Recover your password'));
+$title = Html::encode($translator->translate('Reset password'));
 $this->setTitle($title);
 
 $assetManager->register(
@@ -36,50 +36,60 @@ $items = [];
 $tab = 0;
 ?>
 
-<h1 class="title has-text-black">
-    <?= $title ?>
-</h1>
-
-<hr class="mb-2"/>
-
 <div class="column is-4 is-offset-4">
-    <?= Form::widget()
-        ->action($urlGenerator->generate('request'))
-        ->options(
-            [
-                'id' => 'form-recovery-request',
-                'class' => 'forms-recovery-request bg-white shadow-md rounded px-8 pb-8',
-                'csrf' => $csrf,
-            ]
-        )
-        ->begin() ?>
+    <div class="card">
+        <header class="card-header">
+            <h1 class="card-header-title has-text-black is-justify-content-center title">
+                <?= $title ?>
+            </h1>
+        </header>
 
-        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+        <div class="card-content">
+            <div class="content">
+                <?= Form::widget()
+                    ->action($urlGenerator->generate('request'))
+                    ->options(
+                        [
+                            'class' => 'forms-recovery-request',
+                            'csrf' => $csrf,
+                            'id' => 'form-recovery-request',
+                        ]
+                    )
+                    ->begin() ?>
 
-        <?= Html::submitButton(
-            Html::encode($translator->translate('Continue')),
-            [
-                'class' => 'button is-block is-info is-fullwidth',
-                'id' => 'request-button',
-                'tabindex' => ++$tab,
-            ]
-        ) ?>
+                    <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-    <?= Form::end() ?>
+                    <?= Html::submitButton(
+                        Html::encode($translator->translate('Continue')),
+                        [
+                            'class' => 'button is-block is-info is-fullwidth',
+                            'id' => 'request-button',
+                            'tabindex' => ++$tab,
+                        ]
+                    ) ?>
 
-    <hr class="mt-1"/>
+                <?= Form::end() ?>
+            </div>
+        </div>
 
-    <?php $items[] = Html::a(
-        Html::encode($translator->translate('Already registered - Sign in!')),
-        $urlGenerator->generate('login'),
-        ['tabindex' => ++$tab],
-    ) ?>
+        <footer class="card-footer is-justify-content-center">
+            <hr class="mt-1"/>
 
-    <?= Html::ul(
-        $items,
-        [
-            'encode' => false,
-            'itemOptions' => ['class' => 'text-center'],
-        ]
-    ) ?>
+            <?php $items[] = Html::a(
+                Html::encode($translator->translate('Already registered - Sign in!')),
+                $urlGenerator->generate('login'),
+                ['tabindex' => ++$tab],
+            ) ?>
+
+            <?= Html::ul(
+                $items,
+                [
+                    'encode' => false,
+                    'itemOptions' => ['class' => 'text-center'],
+                ]
+            ) ?>
+
+            <hr class="pb-3"/>
+        </footer>
+    </div>
 </div>

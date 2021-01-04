@@ -35,12 +35,7 @@ $assetManager->register(
 );
 
 $items = [];
-
-$items[] = Html::a(
-    Html::encode($translator->translate('Already registered - Sign in!')),
-    $urlGenerator->generate('login'),
-    ['tabindex' => '5'],
-);
+$tab = 0;
 ?>
 
 <h1 class="title has-text-black">
@@ -61,24 +56,32 @@ $items[] = Html::a(
         )
         ->begin() ?>
 
-        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
+        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-        <?= $field->config($data, 'username')->textInput(['tabindex' => '2']) ?>
+        <?= $field->config($data, 'username')->textInput(['tabindex' => ++$tab]) ?>
 
         <?php if ($repositorySetting->isGeneratingPassword() === false) : ?>
-            <?= $field->config($data, 'password')->passwordInput(['tabindex' => '3']) ?>
+            <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
         <?php endif ?>
 
         <?= Html::submitButton(
             Html::encode($translator->translate('Register')),
             [
-                'class' => 'button is-block is-info is-fullwidth', 'id' => 'register-button', 'tabindex' => '4'
+                'class' => 'button is-block is-info is-fullwidth',
+                'id' => 'register-button',
+                'tabindex' => ++$tab,
             ]
         ) ?>
 
     <?= Form::end() ?>
 
     <hr class="mt-1"/>
+
+    <?php $items[] = Html::a(
+        Html::encode($translator->translate('Already registered - Sign in!')),
+        $urlGenerator->generate('login'),
+        ['tabindex' => ++$tab],
+    ) ?>
 
     <?= Html::ul(
         $items,

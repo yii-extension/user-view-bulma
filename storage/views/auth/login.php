@@ -35,30 +35,7 @@ $assetManager->register(
 );
 
 $items = [];
-
-if ($repositorySetting->isPasswordRecovery()) {
-    $items[] = Html::a(
-        Html::encode($translator->translate('Forgot password')),
-        $urlGenerator->generate('request'),
-        ['tabindex' => '4'],
-    );
-}
-
-if ($repositorySetting->isRegister()) {
-    $items[] = Html::a(
-        Html::encode($translator->translate('Don\'t have an account - Sign up!')),
-        $urlGenerator->generate('register'),
-        ['tabindex' => '5'],
-    );
-}
-
-if ($repositorySetting->isConfirmation()) {
-    $items[] = Html::a(
-        Html::encode($translator->translate("Didn't receive confirmation message")),
-        $urlGenerator->generate('resend'),
-        ['tabindex' => '6'],
-    );
-}
+$tab = 0;
 ?>
 
 <h1 class="title has-text-black">
@@ -80,22 +57,46 @@ if ($repositorySetting->isConfirmation()) {
             )
             ->begin() ?>
 
-            <?= $field->config($data, 'login')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
+            <?= $field->config($data, 'login')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-            <?= $field->config($data, 'password')->passwordInput(['tabindex' => '2']) ?>
+            <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
 
             <?= Html::submitButton(
                 Html::encode($translator->translate('Login')),
                 [
                     'class' => 'button is-block is-info is-fullwidth',
                     'id' => 'login-button',
-                    'tabindex' => '3'
+                    'tabindex' => ++$tab,
                 ]
             ) ?>
 
         <?= Form::end() ?>
 
         <hr class="mt-1"/>
+
+        <?php if ($repositorySetting->isPasswordRecovery()) : ?>
+            <?php $items[] = Html::a(
+                Html::encode($translator->translate('Forgot password')),
+                $urlGenerator->generate('request'),
+                ['tabindex' => ++$tab],
+            ) ?>
+        <?php endif ?>
+
+        <?php if ($repositorySetting->isRegister()) : ?>
+            <?php $items[] = Html::a(
+                Html::encode($translator->translate('Don\'t have an account - Sign up!')),
+                $urlGenerator->generate('register'),
+                ['tabindex' => ++$tab],
+            ) ?>
+        <?php endif ?>
+
+        <?php if ($repositorySetting->isConfirmation()) : ?>
+            <?php $items[] = Html::a(
+                Html::encode($translator->translate("Didn't receive confirmation message")),
+                $urlGenerator->generate('resend'),
+                ['tabindex' => ++$tab],
+            ) ?>
+        <?php endif ?>
 
         <?= Html::ul(
             $items,

@@ -33,12 +33,7 @@ $assetManager->register(
 );
 
 $items = [];
-
-$items[] = Html::a(
-    Html::encode($translator->translate('Already registered - Sign in!')),
-    $urlGenerator->generate('login'),
-    ['tabindex' => '3'],
-);
+$tab = 0;
 ?>
 
 <h1 class="title has-text-black">
@@ -54,25 +49,31 @@ $items[] = Html::a(
             [
                 'id' => 'form-recovery-request',
                 'class' => 'forms-recovery-request bg-white shadow-md rounded px-8 pb-8',
-                'csrf' => $csrf
+                'csrf' => $csrf,
             ]
         )
         ->begin() ?>
 
-        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
+        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
         <?= Html::submitButton(
             Html::encode($translator->translate('Continue')),
             [
                 'class' => 'button is-block is-info is-fullwidth',
-                'name' => 'request-button',
-                'tabindex' => '2'
+                'id' => 'request-button',
+                'tabindex' => ++$tab,
             ]
         ) ?>
 
     <?= Form::end() ?>
 
     <hr class="mt-1"/>
+
+    <?php $items[] = Html::a(
+        Html::encode($translator->translate('Already registered - Sign in!')),
+        $urlGenerator->generate('login'),
+        ['tabindex' => ++$tab],
+    ) ?>
 
     <?= Html::ul(
         $items,

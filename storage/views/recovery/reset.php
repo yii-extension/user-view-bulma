@@ -33,6 +33,8 @@ $this->setTitle($title);
 $assetManager->register(
     $userParameter->getAssetClass(),
 );
+
+$tab = 0;
 ?>
 
 <h1 class="title has-text-black">
@@ -48,19 +50,19 @@ $assetManager->register(
             [
                 'id' => 'form-recovery-reset',
                 'class' => 'forms-recovery-reset bg-white shadow-md rounded px-8 pb-8',
-                'csrf' => $csrf
+                'csrf' => $csrf,
             ]
         )
         ->begin() ?>
 
-        <?= $field->config($data, 'password')->passwordInput(['autofocus' => true, 'tabindex' => '1']) ?>
+        <?= $field->config($data, 'password')->passwordInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
         <?= Html::submitButton(
             Html::encode($translator->translate('Continue')),
             [
                 'class' => 'button is-block is-info is-fullwidth',
-                'name' => 'reset-button',
-                'tabindex' => '2',
+                'id' => 'reset-button',
+                'tabindex' => ++$tab,
             ]
         ) ?>
 

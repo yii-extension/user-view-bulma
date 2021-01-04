@@ -35,20 +35,7 @@ $assetManager->register(
 );
 
 $items = [];
-
-if ($repositorySetting->isRegister()) {
-    $items[] = Html::a(
-        Html::encode($translator->translate("Don't have an account - Sign up!")),
-        $urlGenerator->generate('register'),
-        ['tabindex' => '3'],
-    );
-}
-
-$items[] = Html::a(
-    Html::encode($translator->translate('Already registered - Sign in!')),
-    $urlGenerator->generate('login'),
-    ['tabindex' => '4'],
-);
+$tab = 0;
 ?>
 
 <h1 class="title has-text-black">
@@ -69,18 +56,34 @@ $items[] = Html::a(
         )
         ->begin() ?>
 
-        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
+        <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
         <?= Html::submitButton(
             Html::encode($translator->translate('Continue')),
             [
-                'class' => 'button is-block is-info is-fullwidth', 'name' => 'resend-button', 'tabindex' => '2'
+                'class' => 'button is-block is-info is-fullwidth',
+                'id' => 'resend-button',
+                'tabindex' => ++$tab,
             ]
         ) ?>
 
     <?= Form::end(); ?>
 
     <hr class="mt-1"/>
+
+    <?php if ($repositorySetting->isRegister()) : ?>
+        <?php $items[] = Html::a(
+            Html::encode($translator->translate("Don't have an account - Sign up!")),
+            $urlGenerator->generate('register'),
+            ['tabindex' => ++$tab],
+        ) ?>
+    <?php endif ?>
+
+    <?php $items[] = Html::a(
+        Html::encode($translator->translate('Already registered - Sign in!')),
+        $urlGenerator->generate('login'),
+        ['tabindex' => ++$tab],
+    ) ?>
 
     <?= Html::ul(
         $items,

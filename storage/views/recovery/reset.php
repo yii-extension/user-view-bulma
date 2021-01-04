@@ -27,7 +27,8 @@ use Yiisoft\View\WebView;
  * @psalm-suppress InvalidScope
  */
 
-$this->setTitle('Reset your password.');
+$title = Html::encode($translator->translate('Reset your password'));
+$this->setTitle($title);
 
 $assetManager->register(
     $userParameter->getAssetClass(),
@@ -35,7 +36,7 @@ $assetManager->register(
 ?>
 
 <h1 class="title has-text-black">
-    <?= $translator->translate('Reset your password') ?>
+    <?= $title ?>
 </h1>
 
 <hr class="mb-2"/>
@@ -55,13 +56,13 @@ $assetManager->register(
         <?= $field->config($data, 'password')->passwordInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
         <?= Html::submitButton(
-            $translator->translate('Continue'),
+            Html::encode($translator->translate('Continue')),
             [
                 'class' => 'button is-block is-info is-fullwidth',
                 'name' => 'reset-button',
-                'tabindex' => '2'
+                'tabindex' => '2',
             ]
         ) ?>
 
-    <?php Form::end() ?>
+    <?= Form::end() ?>
 </div>

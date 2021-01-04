@@ -13,7 +13,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "yii-extension/fontawesome": "^1.0@dev",
         "yii-extension/user-settings": "^1.0@dev",
         "yiisoft/assets": "^1.0@dev",
         "yiisoft/form": "^1.0@dev",
@@ -26,8 +25,6 @@
     },
     "require-dev": {
         "nyholm/psr7": "^1.3.0",
-        "phpunit/phpunit": "^9.5",
-        "roave/infection-static-analysis-plugin": "^1.7",
         "vimeo/psalm": "^4.3"
     },
     "autoload": {

@@ -27,15 +27,32 @@ use Yiisoft\View\WebView;
  * @psalm-suppress InvalidScope
  */
 
-$this->setTitle('Resend confirmation message');
+$title = Html::encode($translator->translate('Resend confirmation message'));
+$this->setTitle($title);
 
 $assetManager->register(
     $userParameter->getAssetClass(),
 );
+
+$items = [];
+
+if ($repositorySetting->isRegister()) {
+    $items[] = Html::a(
+        Html::encode($translator->translate("Don't have an account - Sign up!")),
+        $urlGenerator->generate('register'),
+        ['tabindex' => '3'],
+    );
+}
+
+$items[] = Html::a(
+    Html::encode($translator->translate('Already registered - Sign in!')),
+    $urlGenerator->generate('login'),
+    ['tabindex' => '4'],
+);
 ?>
 
 <h1 class="title has-text-black">
-    <?= $translator->translate('Resend confirmation message') ?>
+    <?= $title ?>
 </h1>
 
 <hr class="mb-2"/>
@@ -55,31 +72,21 @@ $assetManager->register(
         <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
         <?= Html::submitButton(
-            $translator->translate('Continue'),
+            Html::encode($translator->translate('Continue')),
             [
                 'class' => 'button is-block is-info is-fullwidth', 'name' => 'resend-button', 'tabindex' => '2'
             ]
         ) ?>
 
-    <?php Form::end(); ?>
+    <?= Form::end(); ?>
 
     <hr class="mt-1"/>
 
-    <?php if ($repositorySetting->isRegister()) : ?>
-        <div class="text-center">
-            <?= Html::a(
-                $translator->translate("Don't have an account - Sign up!"),
-                $urlGenerator->generate('register'),
-                ['tabindex' => '3']
-            ) ?>
-        </p>
-    <?php endif ?>
-
-    <div class="text-center">
-        <?= Html::a(
-            $translator->translate('Already registered - Sign in!'),
-            $urlGenerator->generate('login'),
-            ['tabindex' => '4']
-        ) ?>
-    </div>
+    <?= Html::ul(
+        $items,
+        [
+            'encode' => false,
+            'itemOptions' => ['class' => 'text-center'],
+        ]
+    ) ?>
 </div>

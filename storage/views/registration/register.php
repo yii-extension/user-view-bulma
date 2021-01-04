@@ -27,15 +27,24 @@ use Yiisoft\View\WebView;
  * @psalm-suppress InvalidScope
  */
 
-$this->setTitle('Register');
+$title = Html::encode($translator->translate('Register'));
+$this->setTitle($title);
 
 $assetManager->register(
     $userParameter->getAssetClass(),
 );
+
+$items = [];
+
+$items[] = Html::a(
+    Html::encode($translator->translate('Already registered - Sign in!')),
+    $urlGenerator->generate('login'),
+    ['tabindex' => '5'],
+);
 ?>
 
 <h1 class="title has-text-black">
-    <?= $translator->translate('Register') . '.' ?>
+    <?= $title ?>
 </h1>
 
 <hr class="mb-2"/>
@@ -61,21 +70,21 @@ $assetManager->register(
         <?php endif ?>
 
         <?= Html::submitButton(
-            $translator->translate('Register'),
+            Html::encode($translator->translate('Register')),
             [
                 'class' => 'button is-block is-info is-fullwidth', 'id' => 'register-button', 'tabindex' => '4'
             ]
         ) ?>
 
-        <hr class="mt-1"/>
+    <?= Form::end() ?>
 
-        <div class="text-center">
-            <?= Html::a(
-                $translator->translate('Already registered - Sign in!'),
-                $urlGenerator->generate('login'),
-                ['tabindex' => '5']
-            ) ?>
-        </div>
+    <hr class="mt-1"/>
 
-    <?php Form::end() ?>
+    <?= Html::ul(
+        $items,
+        [
+            'encode' => false,
+            'itemOptions' => ['class' => 'text-center'],
+        ]
+    ); ?>
 </div>

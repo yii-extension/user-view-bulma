@@ -27,15 +27,42 @@ use Yiisoft\View\WebView;
  * @psalm-suppress InvalidScope
  */
 
-$this->setTitle('Login');
+$title = Html::encode($translator->translate('Login'));
+$this->setTitle($title);
 
 $assetManager->register(
     $userParameter->getAssetClass(),
 );
+
+$items = [];
+
+if ($repositorySetting->isPasswordRecovery()) {
+    $items[] = Html::a(
+        Html::encode($translator->translate('Forgot password')),
+        $urlGenerator->generate('request'),
+        ['tabindex' => '4'],
+    );
+}
+
+if ($repositorySetting->isRegister()) {
+    $items[] = Html::a(
+        Html::encode($translator->translate('Don\'t have an account - Sign up!')),
+        $urlGenerator->generate('register'),
+        ['tabindex' => '5'],
+    );
+}
+
+if ($repositorySetting->isConfirmation()) {
+    $items[] = Html::a(
+        Html::encode($translator->translate("Didn't receive confirmation message")),
+        $urlGenerator->generate('resend'),
+        ['tabindex' => '6'],
+    );
+}
 ?>
 
 <h1 class="title has-text-black">
-    <?= $translator->translate('Login') ?>
+    <?= $title ?>
 </h1>
 
 <hr class="mb-2"/>
@@ -58,8 +85,7 @@ $assetManager->register(
             <?= $field->config($data, 'password')->passwordInput(['tabindex' => '2']) ?>
 
             <?= Html::submitButton(
-                $translator->translate('Login') . ' ' .
-                html::tag('i', '', ['class' => 'fas fa-sign-in-alt', 'aria-hidden' => 'true']),
+                Html::encode($translator->translate('Login')),
                 [
                     'class' => 'button is-block is-info is-fullwidth',
                     'id' => 'login-button',
@@ -71,34 +97,12 @@ $assetManager->register(
 
         <hr class="mt-1"/>
 
-        <?php if ($repositorySetting->isPasswordRecovery()) : ?>
-            <div class="text-center">
-                <?= Html::a(
-                    $translator->translate('Forgot password'),
-                    $urlGenerator->generate('request'),
-                    ['tabindex' => '4'],
-                ) ?>
-            </div>
-        <?php endif ?>
-
-        <?php if ($repositorySetting->isRegister()) : ?>
-            <div class="text-center">
-                <?= Html::a(
-                    $translator->translate('Don\'t have an account - Sign up!'),
-                    $urlGenerator->generate('register'),
-                    ['tabindex' => '5'],
-                ) ?>
-            </div>
-        <?php endif ?>
-
-        <?php if ($repositorySetting->isConfirmation()) : ?>
-            <div class="text-center">
-                <?= Html::a(
-                    $translator->translate("Didn't receive confirmation message"),
-                    $urlGenerator->generate('resend'),
-                    ['tabindex' => '6'],
-                ) ?>
-            </div>
-        <?php endif ?>
+        <?= Html::ul(
+            $items,
+            [
+                'encode' => false,
+                'itemOptions' => ['class' => 'text-center'],
+            ]
+        ); ?>
     </div>
 </div>

@@ -12,7 +12,6 @@ return [
         'assetClass' => UserAsset::class,
         'registerAsset' => true,
         'registerBulmaAsset' => true,
-        'registerFontAwesomeIconsAsset' => true,
     ],
 
     'yiisoft/aliases' => [

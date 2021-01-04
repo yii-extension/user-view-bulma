@@ -25,15 +25,24 @@ use Yiisoft\View\WebView;
  * @psalm-suppress InvalidScope
  */
 
-$this->setTitle('Recover your password.');
+$title = Html::encode($translator->translate('Recover your password'));
+$this->setTitle($title);
 
 $assetManager->register(
     $userParameter->getAssetClass(),
 );
+
+$items = [];
+
+$items[] = Html::a(
+    Html::encode($translator->translate('Already registered - Sign in!')),
+    $urlGenerator->generate('login'),
+    ['tabindex' => '3'],
+);
 ?>
 
 <h1 class="title has-text-black">
-    <?= $translator->translate('Recover your password') ?>
+    <?= $title ?>
 </h1>
 
 <hr class="mb-2"/>
@@ -53,7 +62,7 @@ $assetManager->register(
         <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => '1']) ?>
 
         <?= Html::submitButton(
-            $translator->translate('Continue'),
+            Html::encode($translator->translate('Continue')),
             [
                 'class' => 'button is-block is-info is-fullwidth',
                 'name' => 'request-button',
@@ -61,15 +70,15 @@ $assetManager->register(
             ]
         ) ?>
 
-    <?php Form::end() ?>
+    <?= Form::end() ?>
 
     <hr class="mt-1"/>
 
-    <div class="text-center">
-        <?= Html::a(
-            $translator->translate('Already registered - Sign in!'),
-            $urlGenerator->generate('login'),
-            ['tabindex' => '3']
-        ) ?>
-    </div>
+    <?= Html::ul(
+        $items,
+        [
+            'encode' => false,
+            'itemOptions' => ['class' => 'text-center'],
+        ]
+    ) ?>
 </div>

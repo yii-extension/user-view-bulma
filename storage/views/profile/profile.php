@@ -53,7 +53,7 @@ $tab = 0;
             <div class="content">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('profile'))
-                    ->options(['csrf' => $csrf, 'id' => 'form-setting-profile'])
+                    ->options(['csrf' => $csrf, 'id' => 'form-profile-profile'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'name')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>

@@ -63,6 +63,28 @@ $tab = 0;
 
                     <?= $field->config($data, 'password')->passwordInput(['tabindex' => ++$tab]) ?>
 
+                    <hr class="mt-1"/>
+
+                    <?= $field->config($data, 'remember', ['class' => 'has-text-left'])
+                        ->template("{input}{label}")
+                        ->label(
+                            true,
+                            [
+                                'label' => Html::tag('strong', Html::encode($translator->translate('Remember me'))),
+                                'for' => 'switchRegister',
+                            ]
+                        )
+                        ->checkbox(
+                            [
+                                'id' => 'switchRegister',
+                                'class' => 'switch is-info is-outlined is-rounded is-rtl',
+                                'tabindex' => ++$tab
+                            ],
+                            false
+                        ) ?>
+
+                    <hr class="mt-1"/>
+
                     <?= Html::submitButton(
                         Html::encode($translator->translate('Login')),
                         [

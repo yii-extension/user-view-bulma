@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use Yii\Extension\User\Helper\TimeZone;
 use Yii\Extension\User\Settings\RepositorySetting;
 use Yii\Extension\User\View\Parameter\UserParameter;
+use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
-use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
+use Yiisoft\Form\Widget\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\Translator;
@@ -19,13 +21,13 @@ use Yiisoft\View\WebView;
  * @var FormModelInterface $data
  * @var Field $field
  * @var RepositorySetting $repositorySetting
- * @var UrlGeneratorInterface $urlGenerator
  * @var Translator $translator
+ * @var UrlGeneratorInterface $urlGenerator
  * @var UserParameter $userParameter
  * @var WebView $this
  */
 
-$title = Html::encode($translator->translate('Resend confirmation message'));
+$title = Html::encode($translator->translate('Profile'));
 
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
@@ -34,15 +36,10 @@ $assetManager->register(
     $userParameter->getAssetClass(),
 );
 
-$items = [];
+$timezone = new TimeZone();
+
 $tab = 0;
 ?>
-
-<h1 class="title has-text-black">
-    <?= $title ?>
-</h1>
-
-<hr class="mb-2"/>
 
 <div class="column is-4 is-offset-4">
     <div class="card">
@@ -55,45 +52,38 @@ $tab = 0;
         <div class="card-content">
             <div class="content">
                 <?= Form::widget()
-                    ->action($urlGenerator->generate('resend'))
-                    ->options(['csrf' => $csrf, 'id' => 'form-recovery-resend'])
+                    ->action($urlGenerator->generate('profile'))
+                    ->options(['csrf' => $csrf, 'id' => 'form-setting-profile'])
                     ->begin() ?>
 
-                    <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+                    <?= $field->config($data, 'name')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+
+                    <?= $field->config($data, 'publicEmail')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+
+                    <?= $field->config($data, 'website')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+
+                    <?= $field->config($data, 'location')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+
+                    <?= $field->config($data, 'timezone')
+                        ->dropDownList(
+                            ArrayHelper::map($timezone->getAll(), 'timezone', 'name'),
+                            ['tabindex' => ++$tab]
+                        ) ?>
+
+                    <?= $field->config($data, 'bio')
+                        ->textarea(['class' => 'form-control textarea', 'rows' => 2,'tabindex' => ++$tab]) ?>
 
                     <?= Html::submitButton(
-                        Html::encode($translator->translate('Continue')),
+                        'Save',
                         [
                             'class' => 'button is-block is-info is-fullwidth',
-                            'id' => 'resend-button',
+                            'id' => 'save-profile',
                             'tabindex' => ++$tab,
                         ]
                     ) ?>
 
-                <?= Form::end(); ?>
+                <?= Form::end() ?>
             </div>
         </div>
-
-        <footer class="card-footer is-justify-content-center">
-            <hr class="mt-1"/>
-
-            <?php if ($repositorySetting->isRegister()) : ?>
-                <?php $items[] = Html::a(
-                    Html::encode($translator->translate("Don't have an account - Sign up!")),
-                    $urlGenerator->generate('register'),
-                    ['tabindex' => ++$tab],
-                ) ?>
-            <?php endif ?>
-
-            <?php $items[] = Html::a(
-                Html::encode($translator->translate('Already registered - Sign in!')),
-                $urlGenerator->generate('login'),
-                ['tabindex' => ++$tab],
-            ) ?>
-
-            <?= Html::ul($items, ['encode' => false]) ?>
-
-            <hr class="pb-3"/>
-        </footer>
     </div>
 </div>

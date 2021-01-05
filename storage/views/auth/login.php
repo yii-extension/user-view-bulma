@@ -23,11 +23,11 @@ use Yiisoft\View\WebView;
  * @var UrlGeneratorInterface $urlGenerator
  * @var UserParameter $userParameter
  * @var WebView $this
- *
- * @psalm-suppress InvalidScope
  */
 
 $title = Html::encode($translator->translate('Login'));
+
+/** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
 $assetManager->register(
@@ -50,13 +50,7 @@ $tab = 0;
             <div class="content">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('login'))
-                    ->options(
-                        [
-                            'class' => 'forms-auth-login',
-                            'csrf' => $csrf,
-                            'id' => 'form-auth-login',
-                        ]
-                    )
+                    ->options(['csrf' => $csrf, 'id' => 'form-auth-login'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'login')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
@@ -65,7 +59,7 @@ $tab = 0;
 
                     <hr class="mt-1"/>
 
-                    <?= $field->config($data, 'remember', ['class' => 'has-text-left'])
+                    <?= $field->config($data, 'remember')
                         ->template("{input}{label}")
                         ->label(
                             true,

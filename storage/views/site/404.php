@@ -12,6 +12,8 @@ use Yiisoft\Translator\Translator;
  */
 
 $title = Html::encode('404');
+
+/** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 ?>
 

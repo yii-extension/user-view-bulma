@@ -23,11 +23,11 @@ use Yiisoft\View\WebView;
  * @var Translator $translator
  * @var UserParameter $userParameter
  * @var WebView $this
- *
- * @psalm-suppress InvalidScope
  */
 
 $title = Html::encode($translator->translate('Register'));
+
+/** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
 $assetManager->register(
@@ -50,13 +50,7 @@ $tab = 0;
             <div class="content">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('register'))
-                    ->options(
-                        [
-                            'class' => 'forms-registration-register',
-                            'csrf' => $csrf,
-                            'id' => 'form-registration-register',
-                        ]
-                    )
+                    ->options(['csrf' => $csrf, 'id' => 'form-registration-register'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>

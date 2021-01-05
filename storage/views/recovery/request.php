@@ -21,11 +21,11 @@ use Yiisoft\View\WebView;
  * @var UrlGeneratorInterface $urlGenerator
  * @var UserParameter $userParameter
  * @var WebView $this
- *
- * @psalm-suppress InvalidScope
  */
 
 $title = Html::encode($translator->translate('Reset password'));
+
+/** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
 $assetManager->register(
@@ -48,13 +48,7 @@ $tab = 0;
             <div class="content">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('request'))
-                    ->options(
-                        [
-                            'class' => 'forms-recovery-request',
-                            'csrf' => $csrf,
-                            'id' => 'form-recovery-request',
-                        ]
-                    )
+                    ->options(['csrf' => $csrf, 'id' => 'form-recovery-request'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>

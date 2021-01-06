@@ -19,8 +19,7 @@
         "yiisoft/assets": "^1.0@dev",
         "yiisoft/form": "^1.0@dev",
         "yiisoft/router": "^3.0@dev",
-        "yiisoft/translator-formatter-intl": "^3.0@dev",
-        "yiisoft/translator-message-php": "^3.0@dev",
+        "yiisoft/translator": "^3.0@dev",
         "yiisoft/user": "^3.0@dev",
         "yiisoft/yii-bulma": "^1.0@dev",
         "yiisoft/yii-view": "^3.0@dev"

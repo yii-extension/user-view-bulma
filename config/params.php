@@ -23,20 +23,10 @@ return [
         ]
     ],
 
-    'yiisoft/i18n' => [
-        'locale' => 'en'
-    ],
-
     'yiisoft/mailer' => [
         'composer' => [
             'composerView' => '@user-view-mail',
         ],
-    ],
-
-    'yiisoft/translator' => [
-        'path' => '@user-view-language',
-        'defaultCategoryName' => 'user',
-        'locale' => 'en',
     ],
 
     'yiisoft/yii-view' => [

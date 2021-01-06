@@ -38,12 +38,6 @@ $items = [];
 $tab = 0;
 ?>
 
-<h1 class="title has-text-black">
-    <?= $title ?>
-</h1>
-
-<hr class="mb-2"/>
-
 <div class="column is-4 is-offset-4">
     <div class="card">
         <header class="card-header">

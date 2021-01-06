@@ -74,7 +74,7 @@ $tab = 0;
                         ->textarea(['class' => 'form-control textarea', 'rows' => 2,'tabindex' => ++$tab]) ?>
 
                     <?= Html::submitButton(
-                        'Save',
+                        Html::encode($translator->translate('Save')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
                             'id' => 'save-profile',

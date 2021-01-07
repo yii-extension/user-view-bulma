@@ -30,9 +30,7 @@ $title = Html::encode($translator->translate('Reset your password'));
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
-$assetManager->register(
-    $userParameter->getAssetClass(),
-);
+$assetManager->register($userParameter->getAssetClass());
 
 $tab = 0;
 ?>

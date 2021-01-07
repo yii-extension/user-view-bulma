@@ -28,9 +28,7 @@ $title = Html::encode($translator->translate('Reset password'));
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
-$assetManager->register(
-    $userParameter->getAssetClass(),
-);
+$assetManager->register($userParameter->getAssetClass());
 
 $items = [];
 $tab = 0;
@@ -66,7 +64,7 @@ $tab = 0;
             </div>
         </div>
 
-        <footer class="card-footer is-justify-content-center">
+        <footer class="card-footer has-text-centered is-justify-content-center">
             <hr class="mt-1"/>
 
             <?php $items[] = Html::a(

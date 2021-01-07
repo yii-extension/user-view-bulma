@@ -11,12 +11,11 @@ return [
     'yii-extension/user-view-bulma' => [
         'assetClass' => UserAsset::class,
         'registerAsset' => true,
-        'registerBulmaAsset' => true,
     ],
 
     'yiisoft/aliases' => [
         'aliases' => [
-            '@user-view-css' =>  dirname(__DIR__) . '/storage/asset/css',
+            '@user-view-asset' =>  dirname(__DIR__) . '/storage/asset',
             '@user-view-language' => dirname(__DIR__) . '/storage/language',
             '@user-view-mail' =>  dirname(__DIR__) . '/storage/mail',
             '@user-view-views' => dirname(__DIR__) . '/storage/views',

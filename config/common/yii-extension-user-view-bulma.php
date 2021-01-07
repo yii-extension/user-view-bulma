@@ -12,7 +12,6 @@ return [
         '__construct()' => [
             $params['yii-extension/user-view-bulma']['assetClass'],
             $params['yii-extension/user-view-bulma']['registerAsset'],
-            $params['yii-extension/user-view-bulma']['registerBulmaAsset'],
         ],
     ],
 ];

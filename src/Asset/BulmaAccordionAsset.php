@@ -6,19 +6,24 @@ namespace Yii\Extension\User\View\Asset;
 
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Files\PathMatcher\PathMatcher;
+use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 
-final class UserAsset extends AssetBundle
+final class BulmaAccordionAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
     public ?string $baseUrl = '@assetsUrl';
-    public ?string $sourcePath = '@user-view-asset';
+    public ?string $sourcePath = '@npm/bulma-accordion/dist';
 
     public array $css = [
-        'css/user-view-bulma.css',
+        'css/bulma-accordion.min.css'
     ];
 
     public array $js = [
-        'js/user-view-bulma.js'
+        'js/bulma-accordion.min.js'
+    ];
+
+    public array $depends = [
+        BulmaAsset::class,
     ];
 
     public function __construct()
@@ -27,9 +32,9 @@ final class UserAsset extends AssetBundle
 
         $this->publishOptions = [
             'filter' => $pathMatcher->only(
-                'css/user-view-bulma.css',
-                'js/user-view-bulma.js',
-            )
+                'css/bulma-accordion.min.css',
+                'js/bulma-accordion.min.js',
+            ),
         ];
     }
 }

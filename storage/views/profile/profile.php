@@ -32,9 +32,7 @@ $title = Html::encode($translator->translate('Profile'));
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
-$assetManager->register(
-    $userParameter->getAssetClass(),
-);
+$assetManager->register($userParameter->getAssetClass());
 
 $timezone = new TimeZone();
 

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Yii\Extension\User\View\Asset\BulmaSwitchAsset;
 use Yii\Extension\User\Settings\RepositorySetting;
 use Yii\Extension\User\View\Parameter\UserParameter;
 use Yiisoft\Assets\AssetManager;
@@ -30,9 +31,9 @@ $title = Html::encode($translator->translate('Login'));
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
-$assetManager->register(
-    $userParameter->getAssetClass(),
-);
+$assets = array_merge([BulmaSwitchAsset::class], $userParameter->getAssetClass());
+
+$assetManager->register($assets);
 
 $items = [];
 $tab = 0;
@@ -64,16 +65,12 @@ $tab = 0;
                         ->label(
                             true,
                             [
-                                'label' => Html::tag('strong', Html::encode($translator->translate('Remember me'))),
+                                'label' => Html::encode($translator->translate('Remember me')),
                                 'for' => 'switchRegister',
                             ]
                         )
                         ->checkbox(
-                            [
-                                'id' => 'switchRegister',
-                                'class' => 'switch is-info is-outlined is-rounded is-rtl',
-                                'tabindex' => ++$tab
-                            ],
+                            ['class' => 'switch is-info', 'id' => 'switchRegister', 'tabindex' => ++$tab],
                             false
                         ) ?>
 
@@ -92,12 +89,12 @@ $tab = 0;
             </div>
         </div>
 
-        <footer class="card-footer is-justify-content-center">
+        <footer class="card-footer has-text-centered is-justify-content-center ">
             <hr class="mt-1"/>
 
             <?php if ($repositorySetting->isPasswordRecovery()) : ?>
                 <?php $items[] = Html::a(
-                    Html::encode($translator->translate('Forgot password')),
+                    $translator->translate('Forgot password'),
                     $urlGenerator->generate('request'),
                     ['tabindex' => ++$tab],
                 ) ?>

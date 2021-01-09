@@ -17,19 +17,10 @@ final class UserAsset extends AssetBundle
         'css/user-view-bulma.css',
     ];
 
-    public array $js = [
-        'js/user-view-bulma.js'
-    ];
-
     public function __construct()
     {
         $pathMatcher = new PathMatcher();
 
-        $this->publishOptions = [
-            'filter' => $pathMatcher->only(
-                'css/user-view-bulma.css',
-                'js/user-view-bulma.js',
-            )
-        ];
+        $this->publishOptions = ['filter' => $pathMatcher->only('css/user-view-bulma.css')];
     }
 }

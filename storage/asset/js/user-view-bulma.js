@@ -1,1 +1,0 @@
-var accordions = bulmaAccordion.attach();

@@ -39,6 +39,12 @@ $assets = array_merge(
 
 $assetManager->register($assets);
 
+$script = <<<JS
+var accordions = bulmaAccordion.attach()
+JS;
+
+$this->registerJs($script);
+
 $items = [];
 $tab = 0;
 ?>
@@ -48,7 +54,7 @@ $tab = 0;
 </h1>
 
 <?= Form::widget()
-    ->action($urlGenerator->generate('config'))
+    ->action($urlGenerator->generate('settings'))
     ->options(['csrf' => $csrf, 'id' => 'form-setting-config'])
     ->begin() ?>
     <div class="column is-4 is-offset-4">
@@ -80,56 +86,7 @@ $tab = 0;
             </article>
             <article class="accordion">
                 <div class="accordion-header has-background-info">
-                    <p>Enabled/disabled confirmation</p>
-                    <button class="toggle" aria-label="toggle"></button>
-                </div>
-                <div class="accordion-body">
-                    <div class="accordion-content box has-text-black">
-                        <?= $field->config($data, 'confirmation')
-                            ->enclosedByContainer(true)
-                            ->template("{input}{label}")
-                            ->label(true, ['label' => 'Confirmation', 'for' => 'switchConfirm'])
-                            ->checkbox(
-                                ['class' => 'switch is-outlined', 'id' => 'switchConfirm', 'tabindex' => ++$tab],
-                                false,
-                            ) ?>
-                        <p class="mt-2">
-                            If this option is set to true, module sends email that contains a confirmation link that
-                            user must click to complete registration.
-                        </p>
-                    </div>
-                </div>
-            </article>
-            <article class="accordion">
-                <div class="accordion-header has-background-info">
-                    <p>Enabled/disabled generating password</p>
-                    <button class="toggle" aria-label="toggle"></button>
-                </div>
-                <div class="accordion-body">
-                    <div class="accordion-content box has-text-black">
-                        <?= $field->config($data, 'generatingPassword')
-                            ->enclosedByContainer(true)
-                            ->template("{input}{label}")
-                            ->label(true, ['label' => ' Generating password ', 'for' => 'switchGeneratingPassword'])
-                            ->checkbox(
-                                [
-                                    'class' => 'switch is-outlined',
-                                    'id' => 'switchGeneratingPassword',
-                                    'tabindex' => ++$tab
-                                ],
-                                false,
-                            ) ?>
-                        <p class="mt-2">
-                            If this option is set to true, password field on registration page will be hidden and
-                            password for user will be generated automatically. Generated password will be 8
-                            characters long and will be sent to user via email.
-                        </p>
-                    </div>
-                </div>
-            </article>
-            <article class="accordion">
-                <div class="accordion-header has-background-info">
-                    <p>Enabled/disabled password recovery</p>
+                    <p>Recovery</p>
                     <button class="toggle" aria-label="toggle"></button>
                 </div>
                 <div class="accordion-body">
@@ -147,20 +104,47 @@ $tab = 0;
                                 false,
                             ) ?>
                         <p class="mt-2">
-                            If this option is set to true, password field on registration page will be hidden and
-                            password for user will be generated automatically. Generated password will be 8 characters
-                            long and will be sent to user via email.
+                            If this option is to true, users will be able to recovery their forgotten passwords.
                         </p>
                     </div>
                 </div>
             </article>
             <article class="accordion">
                 <div class="accordion-header has-background-info">
-                    <p>Enabled/disabled registration</p>
+                    <p>Registration</p>
                     <button class="toggle" aria-label="toggle"></button>
                 </div>
                 <div class="accordion-body">
                     <div class="accordion-content box has-text-black">
+                        <?= $field->config($data, 'generatingPassword')
+                            ->enclosedByContainer(true)
+                            ->template("{input}{label}")
+                            ->label(true, ['label' => ' Generating password ', 'for' => 'switchGeneratingPassword'])
+                            ->checkbox(
+                                [
+                                    'class' => 'switch is-outlined',
+                                    'id' => 'switchGeneratingPassword',
+                                    'tabindex' => ++$tab
+                                ],
+                                false,
+                            ) ?>
+                        <p class="mt-2 mb-4">
+                            If this option is set to true, password field on registration page will be hidden and
+                            password for user will be generated automatically. Generated password will be 8
+                            characters long and will be sent to user via email.
+                        </p>
+                        <?= $field->config($data, 'confirmation')
+                            ->enclosedByContainer(true)
+                            ->template("{input}{label}")
+                            ->label(true, ['label' => 'Confirmation', 'for' => 'switchConfirm'])
+                            ->checkbox(
+                                ['class' => 'switch is-outlined', 'id' => 'switchConfirm', 'tabindex' => ++$tab],
+                                false,
+                            ) ?>
+                        <p class="mt-2 mb-4">
+                            If this option is set to true, module sends email that contains a confirmation link that
+                            user must click to complete registration.
+                        </p>
                         <?= $field->config($data, 'register')
                             ->enclosedByContainer(true)
                             ->template("{input}{label}")
@@ -213,36 +197,7 @@ $tab = 0;
             </article>
             <article class="accordion">
                 <div class="accordion-header has-background-link">
-                    <p>Other settings</p>
-                    <button class="toggle" aria-label="toggle"></button>
-                </div>
-                <div class="accordion-body">
-                    <div class="accordion-content box has-text-black">
-                        <?= $field->config($data, 'usernameCaseSensitive')
-                            ->enclosedByContainer(true)
-                            ->template("{input}{label}")
-                            ->label(true, ['label' => ' Case sensitive ', 'for' => 'switchCaseSensitive'])
-                            ->checkbox(
-                                ['class' => 'switch is-outlined', 'id' => 'switchCaseSensitive', 'tabindex' => ++$tab],
-                                false,
-                            ) ?>
-                        <p class="mt-2 mb-4">
-                            If this option is set to true, difference between upper and lower case, for username.
-                        </p>
-                        <?= $field->config($data, 'headerMessage')->textInput(['tabindex' => ++$tab]) ?>
-                        <p class="mt-2 mb-4">
-                            The header that will be displayed in flash messages.
-                        </p>
-                        <?= $field->config($data, 'usernameRegExp')->textInput(['tabindex' => ++$tab]) ?>
-                        <p class="mt-2">
-                            Default username regex expression validation.
-                        </p>
-                    </div>
-                </div>
-            </article>
-            <article class="accordion">
-                <div class="accordion-header has-background-black">
-                    <p>Mailer settings</p>
+                    <p>Mailer</p>
                     <button class="toggle" aria-label="toggle"></button>
                 </div>
                 <div class="accordion-body">
@@ -270,6 +225,35 @@ $tab = 0;
                         <?= $field->config($data, 'subjectWelcome')->textInput(['tabindex' => ++$tab]) ?>
                         <p class="mt-2 mb-4">
                             The subject of the welcome register message.
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <article class="accordion">
+                <div class="accordion-header has-background-black">
+                    <p>Other</p>
+                    <button class="toggle" aria-label="toggle"></button>
+                </div>
+                <div class="accordion-body">
+                    <div class="accordion-content box has-text-black">
+                        <?= $field->config($data, 'usernameCaseSensitive')
+                            ->enclosedByContainer(true)
+                            ->template("{input}{label}")
+                            ->label(true, ['label' => ' Case sensitive ', 'for' => 'switchCaseSensitive'])
+                            ->checkbox(
+                                ['class' => 'switch is-outlined', 'id' => 'switchCaseSensitive', 'tabindex' => ++$tab],
+                                false,
+                            ) ?>
+                        <p class="mt-2 mb-4">
+                            If this option is set to true, difference between upper and lower case, for username.
+                        </p>
+                        <?= $field->config($data, 'headerMessage')->textInput(['tabindex' => ++$tab]) ?>
+                        <p class="mt-2 mb-4">
+                            The header that will be displayed in flash messages.
+                        </p>
+                        <?= $field->config($data, 'usernameRegExp')->textInput(['tabindex' => ++$tab]) ?>
+                        <p class="mt-2">
+                            Default username regex expression validation.
                         </p>
                     </div>
                 </div>

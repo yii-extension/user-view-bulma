@@ -53,11 +53,11 @@ $tab = 0;
     <?= $title ?>
 </h1>
 
-<?= Form::widget()
+<div class="column is-4 is-offset-4">
+    <?= Form::widget()
     ->action($urlGenerator->generate('settings'))
     ->options(['csrf' => $csrf, 'id' => 'form-setting-config'])
     ->begin() ?>
-    <div class="column is-4 is-offset-4">
         <section class="accordions">
             <article class="accordion is-active">
                 <div class="accordion-header has-background-danger toggle">
@@ -80,6 +80,33 @@ $tab = 0;
                             ) ?>
                         <p class="mt-2">
                             If this option is to true, users will be able to completely delete their accounts.
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <article class="accordion">
+                <div class="accordion-header has-background-info">
+                    <p>Enabled/disabled generate password</p>
+                    <button class="toggle" aria-label="toggle"></button>
+                </div>
+                <div class="accordion-body">
+                    <div class="accordion-content box has-text-black">
+                        <?= $field->config($data, 'generatingPassword')
+                            ->enclosedByContainer(true)
+                            ->template("{input}{label}")
+                            ->label(true, ['label' => ' Generating password ', 'for' => 'switchGeneratingPassword'])
+                            ->checkbox(
+                                [
+                                    'class' => 'switch is-outlined',
+                                    'id' => 'switchGeneratingPassword',
+                                    'tabindex' => ++$tab
+                                ],
+                                false,
+                            ) ?>
+                        <p class="mt-2">
+                            If this option is set to true, password field on registration page will be hidden and
+                            password for user will be generated automatically. Generated password will be 8
+                            characters long and will be sent to user via email.
                         </p>
                     </div>
                 </div>
@@ -116,23 +143,6 @@ $tab = 0;
                 </div>
                 <div class="accordion-body">
                     <div class="accordion-content box has-text-black">
-                        <?= $field->config($data, 'generatingPassword')
-                            ->enclosedByContainer(true)
-                            ->template("{input}{label}")
-                            ->label(true, ['label' => ' Generating password ', 'for' => 'switchGeneratingPassword'])
-                            ->checkbox(
-                                [
-                                    'class' => 'switch is-outlined',
-                                    'id' => 'switchGeneratingPassword',
-                                    'tabindex' => ++$tab
-                                ],
-                                false,
-                            ) ?>
-                        <p class="mt-2 mb-4">
-                            If this option is set to true, password field on registration page will be hidden and
-                            password for user will be generated automatically. Generated password will be 8
-                            characters long and will be sent to user via email.
-                        </p>
                         <?= $field->config($data, 'confirmation')
                             ->enclosedByContainer(true)
                             ->template("{input}{label}")
@@ -237,7 +247,7 @@ $tab = 0;
                 <div class="accordion-body">
                     <div class="accordion-content box has-text-black">
                         <?= $field->config($data, 'usernameCaseSensitive')
-                            ->enclosedByContainer(true)
+                                ->enclosedByContainer(true)
                             ->template("{input}{label}")
                             ->label(true, ['label' => ' Case sensitive ', 'for' => 'switchCaseSensitive'])
                             ->checkbox(
@@ -267,5 +277,5 @@ $tab = 0;
                 'tabindex' => ++$tab
             ]
         ) ?>
-    </div>
-<?= Form::end() ?>
+    <?= Form::end() ?>
+</div>

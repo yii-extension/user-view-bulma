@@ -39,7 +39,7 @@ $tab = 0;
 <div class="column is-4 is-offset-4">
     <div class="card">
         <header class="card-header">
-            <h1 class="card-header-title has-text-black is-justify-content-center title">
+            <h1 class="card-header-title has-text-black has-text-centered is-justify-content-center title">
                 <?= $title ?>
             </h1>
         </header>

@@ -63,6 +63,7 @@ $tab = 0;
                     <?= $field->config($data, 'location')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
                     <?= $field->config($data, 'timezone')
+                        ->enclosedByContainer(true, ['class' => 'select'])
                         ->dropDownList(
                             ArrayHelper::map($timezone->getAll(), 'timezone', 'name'),
                             ['tabindex' => ++$tab]

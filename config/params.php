@@ -17,15 +17,8 @@ return [
         'aliases' => [
             '@user-view-asset' =>  dirname(__DIR__) . '/storage/asset',
             '@user-view-language' => dirname(__DIR__) . '/storage/language',
-            '@user-view-mail' =>  dirname(__DIR__) . '/storage/mail',
             '@user-view-views' => dirname(__DIR__) . '/storage/views',
         ]
-    ],
-
-    'yiisoft/mailer' => [
-        'composer' => [
-            'composerView' => '@user-view-mail',
-        ],
     ],
 
     'yiisoft/yii-view' => [

@@ -16,7 +16,6 @@ return [
     'yiisoft/aliases' => [
         'aliases' => [
             '@user-view-asset' =>  dirname(__DIR__) . '/storage/asset',
-            '@user-view-language' => dirname(__DIR__) . '/storage/language',
             '@user-view-views' => dirname(__DIR__) . '/storage/views',
         ]
     ],

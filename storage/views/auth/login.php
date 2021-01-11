@@ -11,7 +11,7 @@ use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;
-use Yiisoft\Translator\Translator;
+use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\View\WebView;
 
 /**
@@ -20,7 +20,7 @@ use Yiisoft\View\WebView;
  * @var FormModelInterface $data
  * @var Field $field
  * @var RepositorySetting $repositorySetting
- * @var Translator $translator
+ * @var TranslatorInterface $translator
  * @var UrlGeneratorInterface $urlGenerator
  * @var UserParameter $userParameter
  * @var WebView $this

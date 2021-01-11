@@ -23,9 +23,9 @@ $this->setTitle($title);
     </h1>
 
     <p class="has-text-danger">
-        <?= sprintf(
-            Html::encode($translator->translate('The page %s was not found.')),
-            Html::tag('strong', Html::encode($urlMatcher->getCurrentUri()->getPath()))
+        <?= $translator->translate(
+            'The page {url} was not found.',
+            ['url' => Html::tag('strong', Html::encode($urlMatcher->getCurrentUri()->getPath()))],
         ); ?>
     </p>
 

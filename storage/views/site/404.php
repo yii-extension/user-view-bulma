@@ -24,24 +24,29 @@ $this->setTitle($title);
 
     <p class="has-text-danger">
         <?= $translator->translate(
-            'The page {url} was not found.',
+            'The page {url} was not found',
             ['url' => Html::tag('strong', Html::encode($urlMatcher->getCurrentUri()->getPath()))],
-        ); ?>
+            'user-view',
+        ); ?>.
     </p>
 
     <p class="has-text-grey">
         <?= Html::encode(
-            $translator->translate('The above error occurred while the Web server was processing your request.')
-        ) ?>
+            $translator->translate(
+                'The above error occurred while the Web server was processing your request'
+                [],
+                'user-view',
+            )
+        ) ?>.
         <br/>
         <?= Html::encode(
-            $translator->translate('Please contact us if you think this is a server error. Thank you.')
-        ) ?>
+            $translator->translate('Please contact us if you think this is a server error. Thank you', [], 'user-view')
+        ) ?>.
     </p>
 
     <hr class="mb-2">
 
     <a class ="button is-danger mt-5" href="<?= $urlGenerator->generate('site/index') ?>">
-        <?= Html::encode($translator->translate('Go Back Home')) ?>
+        <?= Html::encode($translator->translate('Go Back Home', [], 'user-view')) ?>
     </a>
 </div>

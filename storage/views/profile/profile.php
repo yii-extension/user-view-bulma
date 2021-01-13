@@ -27,7 +27,7 @@ use Yiisoft\View\WebView;
  * @var WebView $this
  */
 
-$title = Html::encode($translator->translate('Profile'));
+$title = Html::encode($translator->translate('Profile', [], 'user-view'));
 
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
@@ -42,7 +42,7 @@ $tab = 0;
 <div class="column is-4 is-offset-4">
     <div class="card">
         <header class="card-header">
-            <h1 class="card-header-title has-text-black is-justify-content-center title">
+            <h1 class="card-header-title has-text-black has-text-centered is-justify-content-center title">
                 <?= $title ?>
             </h1>
         </header>
@@ -73,7 +73,7 @@ $tab = 0;
                         ->textarea(['class' => 'form-control textarea', 'rows' => 2,'tabindex' => ++$tab]) ?>
 
                     <?= Html::submitButton(
-                        Html::encode($translator->translate('Save')),
+                        Html::encode($translator->translate('Save', [], 'user-view')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
                             'id' => 'save-profile',

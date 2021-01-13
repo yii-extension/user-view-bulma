@@ -26,7 +26,7 @@ use Yiisoft\View\WebView;
  * @var WebView $this
  */
 
-$title = Html::encode($translator->translate('Login'));
+$title = Html::encode($translator->translate('Log in', [], 'user-view'));
 
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
@@ -42,7 +42,7 @@ $tab = 0;
 <div class="column is-4 is-offset-4">
     <div class="card">
         <header class="card-header">
-            <h1 class="card-header-title has-text-black is-justify-content-center title">
+            <h1 class="card-header-title has-text-black has-text-centered is-justify-content-center title">
                 <?= $title ?>
             </h1>
         </header>
@@ -65,7 +65,7 @@ $tab = 0;
                         ->label(
                             true,
                             [
-                                'label' => Html::encode($translator->translate('Remember me')),
+                                'label' => Html::encode($translator->translate('Remember me', [], 'user-view')),
                                 'for' => 'switchRegister',
                             ]
                         )
@@ -77,7 +77,7 @@ $tab = 0;
                     <hr class="mt-1"/>
 
                     <?= Html::submitButton(
-                        Html::encode($translator->translate('Login')),
+                        Html::encode($translator->translate('Log in', [], 'user-view')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
                             'id' => 'login-button',
@@ -94,7 +94,7 @@ $tab = 0;
 
             <?php if ($repositorySetting->isPasswordRecovery()) : ?>
                 <?php $items[] = Html::a(
-                    $translator->translate('Forgot password'),
+                    $translator->translate('Forgot password', [], 'user-view'),
                     $urlGenerator->generate('request'),
                     ['tabindex' => ++$tab],
                 ) ?>
@@ -102,7 +102,7 @@ $tab = 0;
 
             <?php if ($repositorySetting->isRegister()) : ?>
                 <?php $items[] = Html::a(
-                    Html::encode($translator->translate('Don\'t have an account - Sign up!')),
+                    Html::encode($translator->translate('Don\'t have an account - Sign up!', [], 'user-view')),
                     $urlGenerator->generate('register'),
                     ['tabindex' => ++$tab],
                 ) ?>
@@ -110,7 +110,7 @@ $tab = 0;
 
             <?php if ($repositorySetting->isConfirmation()) : ?>
                 <?php $items[] = Html::a(
-                    Html::encode($translator->translate("Didn't receive confirmation message")),
+                    Html::encode($translator->translate('Didn\'t receive confirmation message', [], 'user-view')),
                     $urlGenerator->generate('resend'),
                     ['tabindex' => ++$tab],
                 ) ?>

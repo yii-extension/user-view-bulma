@@ -25,7 +25,7 @@ use Yiisoft\View\WebView;
  * @var WebView $this
  */
 
-$title = Html::encode($translator->translate('Register'));
+$title = Html::encode($translator->translate('Register', [], 'user-view'));
 
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
@@ -39,7 +39,7 @@ $tab = 0;
 <div class="column is-4 is-offset-4">
     <div class="card">
         <header class="card-header">
-            <h1 class="card-header-title has-text-black is-justify-content-center title">
+            <h1 class="card-header-title has-text-black has-text-centered is-justify-content-center title">
                 <?= $title ?>
             </h1>
         </header>
@@ -60,7 +60,7 @@ $tab = 0;
                     <?php endif ?>
 
                     <?= Html::submitButton(
-                        Html::encode($translator->translate('Register')),
+                        Html::encode($translator->translate('Register', [], 'user-view')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
                             'id' => 'register-button',
@@ -76,7 +76,7 @@ $tab = 0;
             <hr class="mt-1"/>
 
             <?php $items[] = Html::a(
-                Html::encode($translator->translate('Already registered - Sign in!')),
+                Html::encode($translator->translate('Already registered - Sign in!', [], 'user-view')),
                 $urlGenerator->generate('login'),
                 ['tabindex' => ++$tab],
             ) ?>

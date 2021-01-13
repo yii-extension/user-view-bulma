@@ -25,7 +25,7 @@ use Yiisoft\View\WebView;
  * @var WebView $this
  */
 
-$title = Html::encode($translator->translate('Resend confirmation message'));
+$title = Html::encode($translator->translate('Resend confirmation message', [], 'user-view'));
 
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
@@ -54,7 +54,7 @@ $tab = 0;
                     <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
                     <?= Html::submitButton(
-                        Html::encode($translator->translate('Continue')),
+                        Html::encode($translator->translate('Continue', [], 'user-view')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
                             'id' => 'resend-button',
@@ -71,14 +71,14 @@ $tab = 0;
 
             <?php if ($repositorySetting->isRegister()) : ?>
                 <?php $items[] = Html::a(
-                    Html::encode($translator->translate("Don't have an account - Sign up!")),
+                    Html::encode($translator->translate('Don\'t have an account - Sign up!', [], 'user-view')),
                     $urlGenerator->generate('register'),
                     ['tabindex' => ++$tab],
                 ) ?>
             <?php endif ?>
 
             <?php $items[] = Html::a(
-                Html::encode($translator->translate('Already registered - Sign in!')),
+                Html::encode($translator->translate('Already registered - Sign in!', [], 'user-view')),
                 $urlGenerator->generate('login'),
                 ['tabindex' => ++$tab],
             ) ?>

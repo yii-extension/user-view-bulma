@@ -33,7 +33,7 @@ $this->setTitle($title);
     <p class="has-text-grey">
         <?= Html::encode(
             $translator->translate(
-                'The above error occurred while the Web server was processing your request'
+                'The above error occurred while the Web server was processing your request',
                 [],
                 'user-view',
             )

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\User\Settings\RepositorySetting;
 use Yii\Extension\User\View\Parameter\UserParameter;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Form\FormModelInterface;
@@ -18,14 +17,13 @@ use Yiisoft\View\WebView;
  * @var string|null $csrf
  * @var FormModelInterface $data
  * @var Field $field
- * @var RepositorySetting $repositorySetting
  * @var Translator $translator
  * @var UrlGeneratorInterface $urlGenerator
  * @var UserParameter $userParameter
  * @var WebView $this
  */
 
-$title = Html::encode($translator->translate('Account setting'));
+$title = Html::encode($translator->translate('Account setting', [], 'user-view'));
 
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
@@ -47,13 +45,13 @@ $tab = 0;
             <div class="content">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('account'))
-                    ->options(['csrf' => $csrf, 'class' => 'form-setting-account', 'id' => 'form-setting-account'])
+                    ->options(['csrf' => $csrf, 'id' => 'form-setting-account'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
                     <?= Html::submitButton(
-                        Html::encode($translator->translate('Save')),
+                        Html::encode($translator->translate('Save', [], 'user-view')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
                             'id' => 'save-account',

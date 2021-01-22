@@ -2,10 +2,16 @@
 
 declare(strict_types=1);
 
-use Yii\Extension\User\Asset\SettingAsset;
+use Yii\Extension\User\Settings\RepositorySetting;
+use Yii\Extension\User\View\Parameter\UserParameter;
+use Yiisoft\Assets\AssetManager;
+use Yiisoft\Form\FormModelInterface;
 use Yiisoft\Form\Widget\Form;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Html\Html;
+use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\Translator\Translator;
+use Yiisoft\View\WebView;
 
 /**
  * @var AssetManager $assetManager

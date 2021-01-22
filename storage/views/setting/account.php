@@ -41,12 +41,10 @@ $tab = 0;
             <div class="content">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('account'))
-                    ->options(['csrf' => $csrf, 'class' => 'forms-settings-account', 'id' => 'form-settings-account'])
+                    ->options(['csrf' => $csrf, 'class' => 'form-setting-account', 'id' => 'form-setting-account'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
-
-                    <?= $field->config($data, 'username')->textInput(['tabindex' => ++$tab]) ?>
 
                     <?= Html::submitButton(
                         Html::encode($translator->translate('Save')),

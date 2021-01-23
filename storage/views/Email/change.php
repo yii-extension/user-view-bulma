@@ -44,8 +44,8 @@ $tab = 0;
         <div class="card-content">
             <div class="content">
                 <?= Form::widget()
-                    ->action($urlGenerator->generate('account'))
-                    ->options(['csrf' => $csrf, 'id' => 'form-setting-account'])
+                    ->action($urlGenerator->generate('email/change'))
+                    ->options(['csrf' => $csrf, 'id' => 'form-email-change'])
                     ->begin() ?>
 
                     <?= $field->config($data, 'email')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
@@ -54,7 +54,7 @@ $tab = 0;
                         Html::encode($translator->translate('Save', [], 'user-view')),
                         [
                             'class' => 'button is-block is-info is-fullwidth',
-                            'id' => 'save-account',
+                            'id' => 'save-email-change',
                             'tabindex' => ++$tab,
                         ]
                     ) ?>

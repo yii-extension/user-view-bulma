@@ -78,10 +78,10 @@ $tab = 0;
             <?php $items[] = Html::a(
                 Html::encode($translator->translate('Already registered - Sign in!', [], 'user-view')),
                 $urlGenerator->generate('login'),
-                ['tabindex' => ++$tab],
+                ['class' => 'has-text-link', 'tabindex' => ++$tab],
             ) ?>
 
-            <?= Html::ul($items, ['encode' => false]) ?>
+            <?= Html::ul($items, ['itemOptions' => ['encode' => false]]) ?>
 
             <hr class="pb-3"/>
         </footer>

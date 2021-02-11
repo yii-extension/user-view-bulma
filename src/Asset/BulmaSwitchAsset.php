@@ -21,6 +21,6 @@ final class BulmaSwitchAsset extends AssetBundle
     {
         $pathMatcher = new PathMatcher();
 
-        $this->publishOptions = ['filter' => $pathMatcher->only('bulma-switch.min.css')];
+        $this->publishOptions = ['filter' => $pathMatcher->only('**bulma-switch.min.css')];
     }
 }

@@ -32,8 +32,8 @@ final class BulmaAccordionAsset extends AssetBundle
 
         $this->publishOptions = [
             'filter' => $pathMatcher->only(
-                'css/bulma-accordion.min.css',
-                'js/bulma-accordion.min.js',
+                '**css/bulma-accordion.min.css',
+                '**js/bulma-accordion.min.js',
             ),
         ];
     }

@@ -21,6 +21,6 @@ final class UserAsset extends AssetBundle
     {
         $pathMatcher = new PathMatcher();
 
-        $this->publishOptions = ['filter' => $pathMatcher->only('css/user-view-bulma.css')];
+        $this->publishOptions = ['filter' => $pathMatcher->only('**css/user-view-bulma.css')];
     }
 }

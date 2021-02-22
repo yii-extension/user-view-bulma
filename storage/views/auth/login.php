@@ -116,7 +116,7 @@ $tab = 0;
                 ) ?>
             <?php endif ?>
 
-            <?= Html::ul($items, ['itemOptions' => ['encode' => false]]) ?>
+            <?= Html::ul()->strings($items, false) ?>
 
             <hr class="pb-3"/>
         </footer>

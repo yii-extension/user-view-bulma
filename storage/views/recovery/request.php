@@ -73,7 +73,7 @@ $tab = 0;
                 ['class' => 'has-text-link', 'tabindex' => ++$tab],
             ) ?>
 
-            <?= Html::ul()->strings($items, false) ?>
+            <?= Html::ul()->strings($items, [], false) ?>
 
             <hr class="pb-3"/>
         </footer>

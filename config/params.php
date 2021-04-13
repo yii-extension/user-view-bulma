@@ -15,8 +15,8 @@ return [
 
     'yiisoft/aliases' => [
         'aliases' => [
-            '@user-view-asset' =>  dirname(__DIR__) . '/storage/asset',
-            '@user-view-views' => dirname(__DIR__) . '/storage/views',
+            '@user-view-asset' =>  '@vendor/yii-extension/user-view-bulma/storage/asset',
+            '@user-view-views' => '@vendor/yii-extension/user-view-bulma/storage/views',
         ]
     ],
 

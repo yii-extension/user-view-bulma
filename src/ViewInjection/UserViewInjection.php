@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Yii\Extension\User\View\ViewInjection;
 
-use Yii\Extension\User\Settings\RepositorySetting;
-use Yii\Extension\User\View\Parameter\UserParameter;
-use Yiisoft\Assets\AssetManager;
-use Yiisoft\Form\Widget\Field;
+use Yii\Extension\Simple\Forms\Field;
+use Yii\Extension\User\Settings\ModuleSettings;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Router\UrlMatcherInterface;
+use Yiisoft\Session\Flash\Flash;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\User\CurrentUser;
 use Yiisoft\Yii\View\ContentParametersInjectionInterface;
@@ -17,56 +16,51 @@ use Yiisoft\Yii\View\LayoutParametersInjectionInterface;
 
 final class UserViewInjection implements ContentParametersInjectionInterface, LayoutParametersInjectionInterface
 {
-    private AssetManager $assetManager;
+    private CurrentUser $currentUser;
     private Field $field;
-    private RepositorySetting $repositorySetting;
+    private Flash $flash;
+    private ModuleSettings $moduleSettings;
     private TranslatorInterface $translator;
     private UrlGeneratorInterface $urlGenerator;
     private UrlMatcherInterface $urlMatcher;
-    private CurrentUser $user;
-    private UserParameter $userParameter;
 
     public function __construct(
-        AssetManager $assetManager,
+        CurrentUser $currentUser,
         Field $field,
-        RepositorySetting $repositorySetting,
+        Flash $flash,
+        ModuleSettings $moduleSettings,
         TranslatorInterface $translator,
         UrlGeneratorInterface $urlGenerator,
-        UrlMatcherInterface $urlMatcher,
-        CurrentUser $user,
-        UserParameter $userParameter
+        UrlMatcherInterface $urlMatcher
     ) {
-        $this->assetManager = $assetManager;
+        $this->currentUser = $currentUser;
         $this->field = $field;
-        $this->repositorySetting = $repositorySetting;
+        $this->flash = $flash;
+        $this->moduleSettings = $moduleSettings;
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
         $this->urlMatcher = $urlMatcher;
-        $this->user = $user;
-        $this->userParameter = $userParameter;
     }
 
     public function getContentParameters(): array
     {
         return [
-            'assetManager' => $this->assetManager,
             'field' => $this->field,
-            'repositorySetting' => $this->repositorySetting,
+            'flash' => $this->flash,
+            'moduleSettings' => $this->moduleSettings,
             'translator' => $this->translator,
             'urlGenerator' => $this->urlGenerator,
             'urlMatcher' => $this->urlMatcher,
-            'userParameter' => $this->userParameter,
         ];
     }
 
     public function getLayoutParameters(): array
     {
         return [
-            'assetManager' => $this->assetManager,
+            'currentUser' => $this->currentUser,
             'translator' => $this->translator,
             'urlGenerator' => $this->urlGenerator,
             'urlMatcher' => $this->urlMatcher,
-            'user' => $this->user,
         ];
     }
 }

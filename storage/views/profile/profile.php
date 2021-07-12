@@ -2,28 +2,25 @@
 
 declare(strict_types=1);
 
+use Yii\Extension\Simple\Forms\Field;
+use Yii\Extension\Simple\Forms\Form;
+use Yii\Extension\Simple\Model\ModelInterface;
 use Yii\Extension\User\Helper\TimeZone;
-use Yii\Extension\User\Settings\RepositorySetting;
-use Yii\Extension\User\View\Parameter\UserParameter;
+use Yii\Extension\User\Settings\ModuleSettings;
 use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Assets\AssetManager;
-use Yiisoft\Form\FormModelInterface;
-use Yiisoft\Form\Widget\Form;
-use Yiisoft\Form\Widget\Field;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\Button;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\View\WebView;
 
 /**
- * @var AssetManager $assetManager
  * @var string|null $csrf
- * @var FormModelInterface $data
  * @var Field $field
- * @var RepositorySetting $repositorySetting
+ * @var ModelInterface $model
+ * @var ModuleSettings $moduleSettings
  * @var TranslatorInterface $translator
  * @var UrlGeneratorInterface $urlGenerator
- * @var UserParameter $userParameter
  * @var WebView $this
  */
 
@@ -32,55 +29,50 @@ $title = Html::encode($translator->translate('Profile', [], 'user-view'));
 /** @psalm-suppress InvalidScope */
 $this->setTitle($title);
 
-$assetManager->register($userParameter->getAssetClass());
-
-$timezone = new TimeZone();
-
+$csrf = $csrf ?? '';
 $tab = 0;
+$timezone = new TimeZone();
 ?>
 
 <div class="column is-4 is-offset-4">
     <div class="card">
         <header class="card-header">
-            <h1 class="card-header-title has-text-black has-text-centered is-justify-content-center title">
+            <h1 class="card-header-title has-text-black has-text-centered is-justify-content-center is-size-4 title">
                 <?= $title ?>
             </h1>
         </header>
 
         <div class="card-content">
-            <div class="content">
+            <div class="content has-text-left">
                 <?= Form::widget()
                     ->action($urlGenerator->generate('profile'))
-                    ->options(['csrf' => $csrf, 'id' => 'form-profile-profile'])
+                    ->csrf($csrf)
+                    ->id('form-profile-profile')
                     ->begin() ?>
 
-                    <?= $field->config($data, 'name')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+                    <?= $field->config($model, 'name')->input(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-                    <?= $field->config($data, 'publicEmail')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+                    <?= $field->config($model, 'publicEmail')->input(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-                    <?= $field->config($data, 'website')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+                    <?= $field->config($model, 'website')->input(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-                    <?= $field->config($data, 'location')->textInput(['autofocus' => true, 'tabindex' => ++$tab]) ?>
+                    <?= $field->config($model, 'location')->input(['autofocus' => true, 'tabindex' => ++$tab]) ?>
 
-                    <?= $field->config($data, 'timezone')
-                        ->enclosedByContainer(true, ['class' => 'select'])
+                    <?= $field->config($model, 'timezone')
                         ->dropDownList(
                             ArrayHelper::map($timezone->getAll(), 'timezone', 'name'),
                             ['tabindex' => ++$tab]
                         ) ?>
 
-                    <?= $field->config($data, 'bio')
+                    <?= $field->config($model, 'bio')
                         ->textarea(['class' => 'form-control textarea', 'rows' => 2,'tabindex' => ++$tab]) ?>
 
-                    <?= Html::submitButton(
-                        Html::encode($translator->translate('Save', [], 'user-view')),
-                        [
-                            'class' => 'button is-block is-info is-fullwidth',
-                            'id' => 'save-profile',
-                            'tabindex' => ++$tab,
-                        ]
-                    ) ?>
-
+                    <?= Button::tag()
+                        ->attributes(['tabindex' => ++$tab])
+                        ->class('button is-block is-info is-fullwidth')
+                        ->content($translator->translate('Save', [], 'user-view'))
+                        ->id('save-profile')
+                        ->type('submit') ?>
                 <?= Form::end() ?>
             </div>
         </div>
